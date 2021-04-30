@@ -49,7 +49,6 @@ class DetailMovieActivity : AppCompatActivity() {
         detailContentBinding.textDate.text =
             resources.getString(R.string.deadline_date, movieEntity.tagLine)
 
-
         try {
             setImageDefault(
                 this,
