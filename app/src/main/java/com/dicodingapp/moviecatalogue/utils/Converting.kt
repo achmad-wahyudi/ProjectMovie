@@ -9,6 +9,6 @@ object Converting {
     }
 
     private fun formatNumber(number: String): String {
-        return NumberFormat.getInstance(Locale.GERMANY).format(number.toDouble())
+        return NumberFormat.getInstance(Locale.ENGLISH).format(number.toDouble())
     }
 }
