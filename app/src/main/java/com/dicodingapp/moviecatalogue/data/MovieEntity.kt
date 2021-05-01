@@ -10,4 +10,8 @@ data class MovieEntity(
     var voteAverage: Double,
     var posterPath: Int,
     var overview: String,
+    var backdropPath: String,
+    var casts: List<CastEntity>,
+    var budget: Int,
+    var revenue: Int,
 )

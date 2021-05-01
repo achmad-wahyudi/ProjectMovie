@@ -13,7 +13,7 @@ object ImageViewHelper {
     fun setImageDefault(activity: Context, image: Drawable?, ivPhoto: ImageView?) {
         try {
             val requestOption: RequestOptions = RequestOptions()
-                .placeholder(R.drawable.ic_broken_image_black)
+                .placeholder(R.drawable.ic_baseline_photo)
                 .centerCrop()
             Glide.with(activity)
                 .load(image)
@@ -21,6 +21,30 @@ object ImageViewHelper {
                 .thumbnail(
                     Glide.with(activity)
                         .load(image)
+                        .apply(requestOption)
+                )
+                .apply(requestOption)
+                .into(ivPhoto!!)
+        } catch (e: Exception) {
+            Glide.with(activity)
+                .load(ContextCompat.getDrawable(activity, R.drawable.ic_broken_image_black))
+                .into(ivPhoto!!)
+            e.printStackTrace()
+        }
+    }
+
+    fun setImageDefaultBackdrop(activity: Context, image: String?, ivPhoto: ImageView?) {
+        try {
+            val imageNew = ConstHelper.TEXT_URL_IMAGE + image
+            val requestOption: RequestOptions = RequestOptions()
+                .placeholder(R.drawable.ic_baseline_photo)
+                .centerCrop()
+            Glide.with(activity)
+                .load(imageNew)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .thumbnail(
+                    Glide.with(activity)
+                        .load(imageNew)
                         .apply(requestOption)
                 )
                 .apply(requestOption)

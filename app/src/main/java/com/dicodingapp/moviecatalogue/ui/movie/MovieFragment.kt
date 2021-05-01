@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicodingapp.moviecatalogue.databinding.FragmentMovieBinding
 
@@ -34,7 +35,7 @@ class MovieFragment : Fragment() {
             val movieAdapter = MovieAdapter()
             movieAdapter.setMovies(movie)
             with(fragmentMovieBinding.rvMovie) {
-                layoutManager = LinearLayoutManager(context)
+                layoutManager = GridLayoutManager(context, 2)
                 setHasFixedSize(true)
                 adapter = movieAdapter
             }

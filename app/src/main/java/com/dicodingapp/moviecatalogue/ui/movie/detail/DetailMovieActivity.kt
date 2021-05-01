@@ -1,15 +1,21 @@
 package com.dicodingapp.moviecatalogue.ui.movie.detail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.dicodingapp.moviecatalogue.R
 import com.dicodingapp.moviecatalogue.data.MovieEntity
 import com.dicodingapp.moviecatalogue.databinding.ActivityDetailMovieBinding
 import com.dicodingapp.moviecatalogue.databinding.ContentDetailMovieBinding
+import com.dicodingapp.moviecatalogue.utils.Converting.formatDollar
+import com.dicodingapp.moviecatalogue.utils.DefineUI.changeStatusBarColor
 import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefault
+import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefaultBackdrop
 
 class DetailMovieActivity : AppCompatActivity() {
 
@@ -25,9 +31,14 @@ class DetailMovieActivity : AppCompatActivity() {
         detailContentBinding = activityDetailMovieBinding.detailContent
 
         setContentView(activityDetailMovieBinding.root)
+        changeStatusBarColor(window)
+        @Suppress("DEPRECATION")
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 
-        setSupportActionBar(activityDetailMovieBinding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        activityDetailMovieBinding.imgBack.setOnClickListener {
+            onBackPressed()
+        }
 
         val viewModel = ViewModelProvider(
             this,
@@ -44,16 +55,34 @@ class DetailMovieActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun populateMovie(movieEntity: MovieEntity) {
         detailContentBinding.textTitle.text = movieEntity.title
-        detailContentBinding.textDate.text =
-            resources.getString(R.string.deadline_date, movieEntity.tagLine)
+        detailContentBinding.textTagLine.text = movieEntity.tagLine
+        detailContentBinding.textDate.text = movieEntity.releaseDate
+        detailContentBinding.textOverview.text = movieEntity.overview
+        detailContentBinding.textStatus.text = movieEntity.status
+        detailContentBinding.textBudget.text = formatDollar(movieEntity.budget.toString())
+        detailContentBinding.textRevenue.text = formatDollar(movieEntity.revenue.toString())
+
+        val vote = (movieEntity.voteAverage * 10).toInt()
+        detailContentBinding.textVote.text = "${vote}%"
+
+        var genres = ""
+        for (genresEntity in movieEntity.genres) {
+            genres += if (genres.isEmpty()) {
+                genresEntity.genreName
+            } else {
+                ", ${genresEntity.genreName}"
+            }
+        }
+        detailContentBinding.textGenre.text = genres
 
         try {
             setImageDefault(
                 this,
                 ContextCompat.getDrawable(this, movieEntity.posterPath),
-                detailContentBinding.imagePoster
+                detailContentBinding.imgPoster
             )
         } catch (e: Exception) {
             Glide.with(this)
@@ -63,8 +92,22 @@ class DetailMovieActivity : AppCompatActivity() {
                         R.drawable.ic_broken_image_black
                     )
                 )
-                .into(detailContentBinding.imagePoster)
+                .into(detailContentBinding.imgPoster)
             e.printStackTrace()
+        }
+
+        setImageDefaultBackdrop(
+            this,
+            movieEntity.backdropPath,
+            detailContentBinding.imgBackdrop
+        )
+
+        val castAdapter = CastAdapter()
+        castAdapter.setCasts(movieEntity.casts)
+        with(detailContentBinding.rvCast) {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+            adapter = castAdapter
         }
     }
 

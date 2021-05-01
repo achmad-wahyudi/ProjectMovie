@@ -2,14 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="10dp"
     android:background="@drawable/round_item_white"
     android:clickable="true"
-    android:focusable="true"
-    android:paddingTop="15dp">
+    android:focusable="true">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_poster"
@@ -29,38 +28,14 @@
             tools:ignore="ContentDescription" />
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/ll_vote"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_margin="7dp"
-        android:background="@drawable/round_item_vote"
-        android:elevation="10dp"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="@id/cv_poster"
-        app:layout_constraintTop_toTopOf="@id/cv_poster">
-
-        <TextView
-            android:id="@+id/tv_item_vote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="99%"
-            android:textColor="@color/colorText"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/cv_poster"
-            app:layout_constraintStart_toStartOf="@id/cv_poster"
-            app:layout_constraintTop_toBottomOf="@id/cv_poster" />
-    </LinearLayout>
-
     <TextView
-        android:id="@+id/tv_item_title"
+        android:id="@+id/tv_item_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:textSize="15sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/cv_poster"
         app:layout_constraintStart_toStartOf="@id/cv_poster"
@@ -68,14 +43,14 @@
         tools:text="Name" />
 
     <TextView
-        android:id="@+id/tv_item_date"
+        android:id="@+id/tv_item_name2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@id/cv_poster"
         app:layout_constraintStart_toStartOf="@id/cv_poster"
-        app:layout_constraintTop_toBottomOf="@+id/tv_item_title"
-        tools:text="Date" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_name"
+        tools:text="Name2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

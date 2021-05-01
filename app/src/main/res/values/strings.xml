@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">MovieCatalogue</string>
 
-    <string name="text_tab1">Home</string>
-    <string name="text_tab2">Bookmark</string>
-    <string name="deadline_date">Deadline %s</string>
-    <string name="title_activity_detail_movie">Detail Movie</string>
+    <string name="text_tab1">Movie</string>
+    <string name="text_tab2">Tv Show</string>
+    <string name="text_detail_movie">Detail Movie</string>
+    <string name="text_overview">Overview</string>
+    <string name="text_status">Status</string>
+    <string name="text_top_billed_cast">Top Billed Cast</string>
+    <string name="text_budget">Budget</string>
+    <string name="text_revenue">Revenue</string>
 </resources>
