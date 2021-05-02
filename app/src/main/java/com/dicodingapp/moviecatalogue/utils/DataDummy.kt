@@ -942,13 +942,13 @@ object DataDummy {
 
         val tvShow = ArrayList<TvShowEntity>()
 
-        val listGenresEntity = ArrayList<GenresEntity>()
+        var listGenresEntity = ArrayList<GenresEntity>()
         listGenresEntity.add(GenresEntity("80", "Crime"))
         listGenresEntity.add(GenresEntity("18", "Drama"))
         listGenresEntity.add(GenresEntity("9648", "Mystery"))
         listGenresEntity.add(GenresEntity("10759", "Action & Adventure"))
 
-        val listCastEntity = ArrayList<CastEntity>()
+        var listCastEntity = ArrayList<CastEntity>()
         listCastEntity.add(
             CastEntity(
                 "76110",
@@ -974,7 +974,7 @@ object DataDummy {
             )
         )
 
-        val tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
+        var tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
             "2012-10-10",
             "10",
             "1973846",
@@ -990,7 +990,7 @@ object DataDummy {
                 "2012-10-10",
                 listGenresEntity,
                 "1412",
-                "1412",
+                "2020-01-28",
                 tvShowLastEpisodeEntity,
                 "Arrow",
                 170,
@@ -1001,6 +1001,532 @@ object DataDummy {
                 "Heroes fall. Legends rise.",
                 "Scripted",
                 6.6,
+                listCastEntity
+            )
+        )
+
+        listGenresEntity = ArrayList()
+        listGenresEntity.add(GenresEntity("10765", "Sci-Fi & Fantasy"))
+        listGenresEntity.add(GenresEntity("35", "Comedy"))
+        listGenresEntity.add(GenresEntity("18", "Drama"))
+
+        listCastEntity = ArrayList()
+        listCastEntity.add(
+            CastEntity(
+                "1010157",
+                "Diane Guerrero",
+                "Crazy Jane",
+                "/5LXvRYdxKLWROAD2KDSXzRNNSdE.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "112371",
+                "April Bowlby",
+                "Rita Farr / Elasti-Woman",
+                "/c5Yk2tqApmbmKXHoPbYQauXssED.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "1376875",
+                "Joivan Wade",
+                "Victor Stone / Cyborg",
+                "/7tPro9hPR54m3zbLIfypsDDUDCI.jpg"
+            )
+        )
+
+        tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
+            "2020-08-06",
+            "9",
+            "2354685",
+            "Wax Patrol",
+            "Before the Doom Patrol can answer a call to save the world from The Candlemaker in the season finale, they must first battle long-forgotten imaginary friends.",
+            "2",
+            "/nlI6o5l04ovzy7W3YNWTokwMuwN.jpg",
+        )
+
+        tvShow.add(
+            TvShowEntity(
+                "/b7unxzWSFfj7i6UVmuPixxxXFOF.jpg",
+                "2019-02-15",
+                listGenresEntity,
+                "79501",
+                "2020-08-06",
+                tvShowLastEpisodeEntity,
+                "Doom Patrol",
+                24,
+                2,
+                "The Doom Patrol’s members each suffered horrible accidents that gave them superhuman abilities — but also left them scarred and disfigured. Traumatized and downtrodden, the team found purpose through The Chief, who brought them together to investigate the weirdest phenomena in existence — and to protect Earth from what they find.",
+                "poster_doom_patrol",
+                "Returning Series",
+                "",
+                "Scripted",
+                7.6,
+                listCastEntity
+            )
+        )
+
+        listGenresEntity = ArrayList()
+
+        listCastEntity = ArrayList()
+
+        tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
+            "2020-04-29",
+            "10",
+            "2710571",
+            "Episode 10",
+            "",
+            "1",
+            "",
+        )
+
+        tvShow.add(
+            TvShowEntity(
+                "/vNnLAKmoczRlNarxyGrrw0KSOeX.jpg",
+                "2012-11-30",
+                listGenresEntity,
+                "118011",
+                "2020-04-29",
+                tvShowLastEpisodeEntity,
+                "Dragon Ball Absalon",
+                15,
+                1,
+                "The series begins twelve years after Goku is seen leaving on Shenron not at the end of Dragon Ball GT, and diverges entirely into its own plot from there, on an alternate timeline from the one which shows Goku Jr. fighting Vegeta Jr. at the World Martial Arts Tournament. In this series, Majuub has reached new levels of power, and has honed the techniques taught to him by Goku. We also see Gotenks finally mature, and Vegeta more powerful than ever.Each character will bring forth their own set of capabilities and purpose, winning fights and being relevant, in order to create an environment that emphasizes teamwork as well as individual worth for each character. In this series, the main set of villains are Saiyans, with abilities highly similar to the Saiyans that we are familiar with. These new Saiyans are more powerful than any threat the Z Fighters have ever faced, but after twelve years of intensive training, our heroes will not be easily defeated .",
+                "poster_dragon_ball",
+                "Returning Series",
+                "",
+                "Scripted",
+                5.3,
+                listCastEntity
+            )
+        )
+
+        listGenresEntity = ArrayList()
+        listGenresEntity.add(GenresEntity("10765", "Action & Adventure"))
+        listGenresEntity.add(GenresEntity("35", "Animation"))
+        listGenresEntity.add(GenresEntity("18", "Comedy"))
+        listGenresEntity.add(GenresEntity("18", "Sci-Fi & Fantasy"))
+
+        listCastEntity = ArrayList()
+        listCastEntity.add(
+            CastEntity(
+                "1010157",
+                "Tetsuya Kakihara",
+                "Natsu Dragneel (voice)",
+                "/uogW9g7uqEdB1nbShhjp6NSXeue.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "112371",
+                "Aya Hirano",
+                "Rūshi Hātofiria (voice)",
+                "/aDe9MO0iwWvTBviXxv6axAAHGlE.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "1376875",
+                "Rie Kugimiya",
+                "Happī (voice)",
+                "/5uxG4tsx8vCfxI8yr1RoeDkrsDg.jpg"
+            )
+        )
+
+        tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
+            "2019-09-29",
+            "51",
+            "2354685",
+            "Dearest Friends",
+            "Using the power of all seven Dragon Slayers, Natsu unleashes one final, soulful attack on Acnologia. One year later, Lucy reveals everything that has happened since the battle.",
+            "8",
+            "/sOzVgRsIjisBMQUxeMjnw1oF40w.jpg",
+        )
+
+        tvShow.add(
+            TvShowEntity(
+                "/fANxNeH9JCXPrzNEfriGu1Y95dF.jpg",
+                "2009-10-12",
+                listGenresEntity,
+                "46261",
+                "2019-09-29",
+                tvShowLastEpisodeEntity,
+                "Fairy Tail",
+                328,
+                8,
+                "Lucy is a 17-year-old girl, who wants to be a full-fledged mage. One day when visiting Harujion Town, she meets Natsu, a young man who gets sick easily by any type of transportation. But Natsu isn't just any ordinary kid, he's a member of one of the world's most infamous mage guilds: Fairy Tail.",
+                "poster_fairytail",
+                "Ended",
+                "Fairy Tail",
+                "Scripted",
+                7.8,
+                listCastEntity
+            )
+        )
+
+        listGenresEntity = ArrayList()
+        listGenresEntity.add(GenresEntity("35", "Animation"))
+        listGenresEntity.add(GenresEntity("18", "Comedy"))
+
+        listCastEntity = ArrayList()
+        listCastEntity.add(
+            CastEntity(
+                "1010157",
+                "Tetsuya Kakihara",
+                "Natsu Dragneel (voice)",
+                "/uogW9g7uqEdB1nbShhjp6NSXeue.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "112371",
+                "Aya Hirano",
+                "Rūshi Hātofiria (voice)",
+                "/aDe9MO0iwWvTBviXxv6axAAHGlE.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "1376875",
+                "Rie Kugimiya",
+                "Happī (voice)",
+                "/5uxG4tsx8vCfxI8yr1RoeDkrsDg.jpg"
+            )
+        )
+
+        tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
+            "2021-04-18",
+            "17",
+            "2354685",
+            "Young Parent Trap",
+            "Lois and Peter are mistaken for \"young parents\" by another couple at Stewie's school and invited to live in a millennial apartment complex, leaving Meg and Chris home alone.",
+            "19",
+            "/vrFQu444wbvu5LuFRU2yxuHPvdO.jpg",
+        )
+
+        tvShow.add(
+            TvShowEntity(
+                "/eyO5b3b3wgfiyuIKQMAyekh40A2.jpg",
+                "1999-01-31",
+                listGenresEntity,
+                "46261",
+                "2021-04-18",
+                tvShowLastEpisodeEntity,
+                "Fairy Tail",
+                368,
+                21,
+                "Sick, twisted, politically incorrect and Freakin' Sweet animated series featuring the adventures of the dysfunctional Griffin family. Bumbling Peter and long-suffering Lois have three kids. Stewie (a brilliant but sadistic baby bent on killing his mother and taking over the world), Meg (the oldest, and is the most unpopular girl in town) and Chris (the middle kid, he's not very bright but has a passion for movies). The final member of the family is Brian - a talking dog and much more than a pet, he keeps Stewie in check whilst sipping Martinis and sorting through his own life issues.",
+                "poster_family_guy",
+                "Returning Series",
+                "Parental Discretion Advised, that's how you know it's good",
+                "Scripted",
+                7.0,
+                listCastEntity
+            )
+        )
+
+        listGenresEntity = ArrayList()
+        listGenresEntity.add(GenresEntity("35", "Drama"))
+        listGenresEntity.add(GenresEntity("18", "Sci-Fi & Fantasy"))
+
+        listCastEntity = ArrayList()
+        listCastEntity.add(
+            CastEntity(
+                "1010157",
+                "Tetsuya Kakihara",
+                "Natsu Dragneel (voice)",
+                "/uogW9g7uqEdB1nbShhjp6NSXeue.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "112371",
+                "Aya Hirano",
+                "Rūshi Hātofiria (voice)",
+                "/aDe9MO0iwWvTBviXxv6axAAHGlE.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "1376875",
+                "Rie Kugimiya",
+                "Happī (voice)",
+                "/5uxG4tsx8vCfxI8yr1RoeDkrsDg.jpg"
+            )
+        )
+
+        tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
+            "2021-04-13",
+            "7",
+            "2354685",
+            "Growing Pains",
+            "When a mysterious ice powered enemy frames Frost for a brutal crime, she must find a way to clear her name; Barry and Iris have a surprise houseguest, and Joe continues to deal with Kristen Kramer.",
+            "7",
+            "/5kD6fRLorx0dPdvgs7v2i45ZPvp.jpg",
+        )
+
+        tvShow.add(
+            TvShowEntity(
+                "/z59kJfcElR9eHO9rJbWp4qWMuee.jpg",
+                "2014-10-07",
+                listGenresEntity,
+                "60735",
+                "2021-04-13",
+                tvShowLastEpisodeEntity,
+                "The Flash",
+                151,
+                7,
+                "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \\\"meta-human\\\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash.",
+                "poster_flash",
+                "Returning Series",
+                "The fastest man alive.",
+                "Scripted",
+                7.7,
+                listCastEntity
+            )
+        )
+
+        listGenresEntity = ArrayList()
+        listGenresEntity.add(GenresEntity("35", "Drama"))
+        listGenresEntity.add(GenresEntity("18", "Family"))
+
+        listCastEntity = ArrayList()
+        listCastEntity.add(
+            CastEntity(
+                "1010157",
+                "Tetsuya Kakihara",
+                "Natsu Dragneel (voice)",
+                "/uogW9g7uqEdB1nbShhjp6NSXeue.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "112371",
+                "Aya Hirano",
+                "Rūshi Hātofiria (voice)",
+                "/aDe9MO0iwWvTBviXxv6axAAHGlE.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "1376875",
+                "Rie Kugimiya",
+                "Happī (voice)",
+                "/5uxG4tsx8vCfxI8yr1RoeDkrsDg.jpg"
+            )
+        )
+
+        tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
+            "2020-04-26",
+            "22",
+            "2354685",
+            "The Mountain",
+            "Miles is forced to examine his lack of faith more than ever before when the God Account sends him his sister, Ali, as a friend suggestion on the eve of her cancer surgery.",
+            "2",
+            "/8kOvTqjKTs3K56B90wDRwjesS72.jpg",
+        )
+
+        tvShow.add(
+            TvShowEntity(
+                "/vcw31JewR0wuX3RZ8x3Khdptsih.jpg",
+                "2018-09-30",
+                listGenresEntity,
+                "60735",
+                "2020-04-26",
+                tvShowLastEpisodeEntity,
+                "God Friended Me",
+                42,
+                2,
+                "A self-proclaimed \\\"pesky atheist\\\" is encouraged to help strangers by someone claiming to be God who friends him on Facebook.",
+                "poster_god",
+                "Canceled",
+                "",
+                "Scripted",
+                8.1,
+                listCastEntity
+            )
+        )
+
+        listGenresEntity = ArrayList()
+        listGenresEntity.add(GenresEntity("35", "Drama"))
+        listGenresEntity.add(GenresEntity("18", "Family"))
+
+        listCastEntity = ArrayList()
+        listCastEntity.add(
+            CastEntity(
+                "1010157",
+                "Tetsuya Kakihara",
+                "Natsu Dragneel (voice)",
+                "/uogW9g7uqEdB1nbShhjp6NSXeue.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "112371",
+                "Aya Hirano",
+                "Rūshi Hātofiria (voice)",
+                "/aDe9MO0iwWvTBviXxv6axAAHGlE.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "1376875",
+                "Rie Kugimiya",
+                "Happī (voice)",
+                "/5uxG4tsx8vCfxI8yr1RoeDkrsDg.jpg"
+            )
+        )
+
+        tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
+            "2019-04-25",
+            "21",
+            "2354685",
+            "Legend of Dark Knight: The Beginning...",
+            "The series flash-forwards 10 years into the future, as Bruce is set to return to Gotham for the opening of the new Wayne Tower. A series of crimes leads Gordon to believe Penguin and The Riddler are up to their old tricks. However, when Bullock is framed for a murder, Gordon begins to piece together an even more sinister plot targeting the city, and a new figure emerges from the shadows to be the hero Gotham desperately needs.",
+            "5",
+            "/x5yBjV3yqO2og0tBPAE1OdZ8fqC.jpg",
+        )
+
+        tvShow.add(
+            TvShowEntity(
+                "/7QSM3AsgWXctWBm7OFov9dGdZgt.jpg",
+                "2014-09-22",
+                listGenresEntity,
+                "60735",
+                "2019-04-25",
+                tvShowLastEpisodeEntity,
+                "Gotham",
+                100,
+                5,
+                "A self-proclaimed \\\"pesky atheist\\\" is encouraged to help strangers by someone claiming to be God who friends him on Facebook.",
+                "poster_gotham",
+                "Ended",
+                "Before Batman, there was Gotham.",
+                "Scripted",
+                7.5,
+                listCastEntity
+            )
+        )
+
+        listGenresEntity = ArrayList()
+        listGenresEntity.add(GenresEntity("35", "Drama"))
+        listGenresEntity.add(GenresEntity("18", "Family"))
+
+        listCastEntity = ArrayList()
+        listCastEntity.add(
+            CastEntity(
+                "1010157",
+                "Tetsuya Kakihara",
+                "Natsu Dragneel (voice)",
+                "/uogW9g7uqEdB1nbShhjp6NSXeue.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "112371",
+                "Aya Hirano",
+                "Rūshi Hātofiria (voice)",
+                "/aDe9MO0iwWvTBviXxv6axAAHGlE.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "1376875",
+                "Rie Kugimiya",
+                "Happī (voice)",
+                "/5uxG4tsx8vCfxI8yr1RoeDkrsDg.jpg"
+            )
+        )
+
+        tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
+            "2018-09-07",
+            "10",
+            "2354685",
+            "A Duel of Iron",
+            "In the season finale, Iron Fists collide as the fate of New York City hangs in the balance.",
+            "2",
+            "/aV32cXbvB44RKgNNec0dwQ5CQP4.jpg",
+        )
+
+        tvShow.add(
+            TvShowEntity(
+                "/xHCfWGlxwbtMeeOnTvxUCZRGnkk.jpg",
+                "2017-03-17",
+                listGenresEntity,
+                "60735",
+                "2018-09-07",
+                tvShowLastEpisodeEntity,
+                "Marvel's Iron Fist",
+                23,
+                2,
+                "Danny Rand resurfaces 15 years after being presumed dead. Now, with the power of the Iron Fist, he seeks to reclaim his past and fulfill his destiny.",
+                "poster_iron_fist",
+                "Canceled",
+                "",
+                "Scripted",
+                6.6,
+                listCastEntity
+            )
+        )
+
+        listGenresEntity = ArrayList()
+        listGenresEntity.add(GenresEntity("35", "Drama"))
+        listGenresEntity.add(GenresEntity("18", "Family"))
+
+        listCastEntity = ArrayList()
+        listCastEntity.add(
+            CastEntity(
+                "1010157",
+                "Tetsuya Kakihara",
+                "Natsu Dragneel (voice)",
+                "/uogW9g7uqEdB1nbShhjp6NSXeue.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "112371",
+                "Aya Hirano",
+                "Rūshi Hātofiria (voice)",
+                "/aDe9MO0iwWvTBviXxv6axAAHGlE.jpg"
+            )
+        )
+        listCastEntity.add(
+            CastEntity(
+                "1376875",
+                "Rie Kugimiya",
+                "Happī (voice)",
+                "/5uxG4tsx8vCfxI8yr1RoeDkrsDg.jpg"
+            )
+        )
+
+        tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
+            "2017-03-23",
+            "500",
+            "2354685",
+            "Hidden Leaf Story, The Perfect Day for a Wedding, Part 7: The Message",
+            "Naruto had once lived a lonely existence, ostracized by everyone. But Iruka's words and his very presence have supported Naruto to this day. As Naruto's wedding nears, Iruka begins to lose sight of what he was to Naruto, and is unsure of what to say for his message.",
+            "20",
+            "/1swhNPNh16f1B6ZqEAmCg7mkWSn.jpg",
+        )
+
+        tvShow.add(
+            TvShowEntity(
+                "/dTFnU3EQB79aDM4HnUj06Y9Xbq1.jpg",
+                "2007-02-15",
+                listGenresEntity,
+                "60735",
+                "2017-03-23",
+                tvShowLastEpisodeEntity,
+                "Naruto Shippūden",
+                500,
+                20,
+                "Naruto Shippuuden is the continuation of the original animated TV series Naruto.The story revolves around an older and slightly more matured Uzumaki Naruto and his quest to save his friend Uchiha Sasuke from the grips of the snake-like Shinobi, Orochimaru. After 2 and a half years Naruto finally returns to his village of Konoha, and sets about putting his ambitions to work, though it will not be easy, as He has amassed a few (more dangerous) enemies, in the likes of the shinobi organization; Akatsuki.",
+                "poster_naruto_shipudden",
+                "Ended",
+                "",
+                "Scripted",
+                8.6,
                 listCastEntity
             )
         )
