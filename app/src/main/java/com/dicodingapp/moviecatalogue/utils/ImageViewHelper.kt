@@ -1,7 +1,6 @@
 package com.dicodingapp.moviecatalogue.utils
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -10,7 +9,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.dicodingapp.moviecatalogue.R
 
 object ImageViewHelper {
-    fun setImageDefault(activity: Context, image: Drawable?, ivPhoto: ImageView?) {
+    fun setImageDefault(activity: Context, image: Int?, ivPhoto: ImageView?) {
         try {
             val requestOption: RequestOptions = RequestOptions()
                 .placeholder(R.drawable.ic_baseline_photo)

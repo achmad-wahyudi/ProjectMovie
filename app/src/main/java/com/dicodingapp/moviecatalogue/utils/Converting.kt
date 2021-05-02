@@ -8,7 +8,7 @@ object Converting {
         return "$" + formatNumber(number)
     }
 
-    private fun formatNumber(number: String): String {
+    fun formatNumber(number: String): String {
         return NumberFormat.getInstance(Locale.ENGLISH).format(number.toDouble())
     }
 }

@@ -1,19 +1,20 @@
 package com.dicodingapp.moviecatalogue.data
 
 data class TvShowEntity(
-    var createdBy: List<CreditCreatorEntity>,
+    var backdropPath: String,
     var firstAirDate: String,
     var genres: List<GenresEntity>,
     var tvShowId: String,
     var lastAirDate: String,
     var lastEpisodeToAir: TvShowLastEpisodeEntity,
     var name: String,
-//    var nextEpisodeToAir: TvShowLastEpisodeEntity,
     var numberOfEpisodes: Int,
     var numberOfSeasons: Int,
     var overview: String,
+    var posterPath: String,
     var status: String,
     var tagLine: String,
     var type: String,
-    var voteAverage: String,
+    var voteAverage: Double,
+    var casts: List<CastEntity>,
 )

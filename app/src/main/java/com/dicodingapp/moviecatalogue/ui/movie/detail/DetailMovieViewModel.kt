@@ -1,6 +1,5 @@
 package com.dicodingapp.moviecatalogue.ui.movie.detail
 
-import android.app.Activity
 import androidx.lifecycle.ViewModel
 import com.dicodingapp.moviecatalogue.data.MovieEntity
 import com.dicodingapp.moviecatalogue.utils.DataDummy
@@ -12,9 +11,9 @@ class DetailMovieViewModel : ViewModel() {
         this.movieId = movieId
     }
 
-    fun getMovie(activity: Activity): MovieEntity {
+    fun getMovie(): MovieEntity {
         lateinit var movie: MovieEntity
-        val moviesEntities = DataDummy.generateDummyMovie(activity)
+        val moviesEntities = DataDummy.generateDummyMovie()
         for (movieEntity in moviesEntities) {
             if (movieEntity.movieId == movieId) {
                 movie = movieEntity

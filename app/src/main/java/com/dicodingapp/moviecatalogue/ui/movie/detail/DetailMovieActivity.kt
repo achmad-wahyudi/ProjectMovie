@@ -50,23 +50,23 @@ class DetailMovieActivity : AppCompatActivity() {
             val movieId = extras.getString(EXTRA_MOVIE)
             if (movieId != null) {
                 viewModel.setSelectedMovie(movieId)
-                populateMovie(viewModel.getMovie(this))
+                populateMovie(viewModel.getMovie())
             }
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun populateMovie(movieEntity: MovieEntity) {
-        detailContentBinding.textTitle.text = movieEntity.title
-        detailContentBinding.textTagLine.text = movieEntity.tagLine
-        detailContentBinding.textDate.text = movieEntity.releaseDate
-        detailContentBinding.textOverview.text = movieEntity.overview
-        detailContentBinding.textStatus.text = movieEntity.status
-        detailContentBinding.textBudget.text = formatDollar(movieEntity.budget.toString())
-        detailContentBinding.textRevenue.text = formatDollar(movieEntity.revenue.toString())
+        detailContentBinding.tvTitle.text = movieEntity.title
+        detailContentBinding.tvTagLine.text = movieEntity.tagLine
+        detailContentBinding.tvDate.text = movieEntity.releaseDate
+        detailContentBinding.tvOverview.text = movieEntity.overview
+        detailContentBinding.tvStatus.text = movieEntity.status
+        detailContentBinding.tvBudget.text = formatDollar(movieEntity.budget.toString())
+        detailContentBinding.tvRevenue.text = formatDollar(movieEntity.revenue.toString())
 
         val vote = (movieEntity.voteAverage * 10).toInt()
-        detailContentBinding.textVote.text = "${vote}%"
+        detailContentBinding.tvVote.text = "${vote}%"
 
         var genres = ""
         for (genresEntity in movieEntity.genres) {
@@ -76,12 +76,17 @@ class DetailMovieActivity : AppCompatActivity() {
                 ", ${genresEntity.genreName}"
             }
         }
-        detailContentBinding.textGenre.text = genres
+        detailContentBinding.tvGenre.text = genres
 
         try {
+            val resources = this.resources.getIdentifier(
+                movieEntity.posterPath,
+                "drawable",
+                this.packageName
+            )
             setImageDefault(
                 this,
-                ContextCompat.getDrawable(this, movieEntity.posterPath),
+                resources,
                 detailContentBinding.imgPoster
             )
         } catch (e: Exception) {

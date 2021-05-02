@@ -8,7 +8,7 @@ data class MovieEntity(
     var status: String,
     var tagLine: String,
     var voteAverage: Double,
-    var posterPath: Int,
+    var posterPath: String,
     var overview: String,
     var backdropPath: String,
     var casts: List<CastEntity>,

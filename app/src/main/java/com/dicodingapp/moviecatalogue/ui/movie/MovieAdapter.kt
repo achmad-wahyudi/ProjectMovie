@@ -53,9 +53,14 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                     itemView.context.startActivity(intent)
                 }
                 try {
+                    val resources = itemView.context.resources.getIdentifier(
+                        movie.posterPath,
+                        "drawable",
+                        itemView.context.packageName
+                    )
                     setImageDefault(
                         itemView.context,
-                        ContextCompat.getDrawable(itemView.context, movie.posterPath),
+                        resources,
                         imgPoster
                     )
                 } catch (e: Exception) {

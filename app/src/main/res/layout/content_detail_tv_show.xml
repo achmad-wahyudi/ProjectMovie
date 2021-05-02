@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:clipToPadding="false"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:paddingBottom="10dp">
 
     <ImageView
-        android:id="@+id/img_backdrop"
+        android:id="@+id/img_backdrop_tv"
         android:layout_width="0dp"
         android:layout_height="350dp"
         android:scaleType="centerInside"
@@ -30,19 +31,19 @@
         tools:ignore="ContentDescription" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_poster"
+        android:id="@+id/cv_poster_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:elevation="0dp"
         app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/img_backdrop"
+        app:layout_constraintBottom_toBottomOf="@id/img_backdrop_tv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/img_backdrop"
+        app:layout_constraintTop_toTopOf="@id/img_backdrop_tv"
         app:layout_constraintVertical_bias="0.71">
 
         <ImageView
-            android:id="@+id/img_poster"
+            android:id="@+id/img_poster_tv"
             android:layout_width="150dp"
             android:layout_height="200dp"
             android:src="@drawable/ic_baseline_photo"
@@ -50,31 +51,31 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
-        android:id="@+id/ll_vote"
+        android:id="@+id/ll_vote_tv"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_margin="7dp"
         android:background="@drawable/round_item_vote"
         android:elevation="10dp"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="@id/cv_poster"
-        app:layout_constraintTop_toTopOf="@id/cv_poster">
+        app:layout_constraintStart_toStartOf="@id/cv_poster_tv"
+        app:layout_constraintTop_toTopOf="@id/cv_poster_tv">
 
         <TextView
-            android:id="@+id/tv_vote"
+            android:id="@+id/tv_vote_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorText"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/cv_poster"
-            app:layout_constraintStart_toStartOf="@id/cv_poster"
-            app:layout_constraintTop_toBottomOf="@id/cv_poster"
+            app:layout_constraintEnd_toEndOf="@id/cv_poster_tv"
+            app:layout_constraintStart_toStartOf="@id/cv_poster_tv"
+            app:layout_constraintTop_toBottomOf="@id/cv_poster_tv"
             tools:text="99%" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_tag_line"
+        android:id="@+id/tv_tag_line_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -84,13 +85,13 @@
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
         android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="@id/cv_poster"
-        app:layout_constraintStart_toStartOf="@+id/cv_poster"
-        app:layout_constraintTop_toBottomOf="@+id/cv_poster"
+        app:layout_constraintEnd_toEndOf="@id/cv_poster_tv"
+        app:layout_constraintStart_toStartOf="@+id/cv_poster_tv"
+        app:layout_constraintTop_toBottomOf="@+id/cv_poster_tv"
         tools:text="Tag Line" />
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_title_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -99,12 +100,12 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_poster"
-        app:layout_constraintTop_toTopOf="@+id/cv_poster"
+        app:layout_constraintStart_toEndOf="@+id/cv_poster_tv"
+        app:layout_constraintTop_toTopOf="@+id/cv_poster_tv"
         tools:text="title" />
 
     <TextView
-        android:id="@+id/tv_date"
+        android:id="@+id/tv_date_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -112,12 +113,12 @@
         android:textColor="@color/colorWhite"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_poster"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintStart_toEndOf="@+id/cv_poster_tv"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_tv"
         tools:text="Date" />
 
     <TextView
-        android:id="@+id/tv_genre"
+        android:id="@+id/tv_genre_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -126,12 +127,12 @@
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_poster"
-        app:layout_constraintTop_toBottomOf="@+id/tv_date"
+        app:layout_constraintStart_toEndOf="@+id/cv_poster_tv"
+        app:layout_constraintTop_toBottomOf="@+id/tv_date_tv"
         tools:text="Genre" />
 
     <TextView
-        android:id="@+id/status"
+        android:id="@+id/status_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -143,11 +144,11 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_poster"
-        app:layout_constraintTop_toBottomOf="@+id/tv_genre" />
+        app:layout_constraintStart_toEndOf="@+id/cv_poster_tv"
+        app:layout_constraintTop_toBottomOf="@+id/tv_genre_tv" />
 
     <TextView
-        android:id="@+id/tv_status"
+        android:id="@+id/tv_status_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -157,71 +158,71 @@
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_poster"
-        app:layout_constraintTop_toBottomOf="@+id/status" />
+        app:layout_constraintStart_toEndOf="@+id/cv_poster_tv"
+        app:layout_constraintTop_toBottomOf="@+id/status_tv" />
 
     <TextView
-        android:id="@+id/budget"
+        android:id="@+id/number_of_episodes_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="start"
         android:maxLines="1"
-        android:textStyle="bold"
         android:text="@string/text_budget"
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_poster"
-        app:layout_constraintTop_toBottomOf="@+id/tv_status" />
+        app:layout_constraintStart_toEndOf="@+id/cv_poster_tv"
+        app:layout_constraintTop_toBottomOf="@+id/tv_status_tv" />
 
     <TextView
-        android:id="@+id/tv_budget"
+        android:id="@+id/tv_number_of_episodes_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:maxLines="1"
-        android:text="@string/text_budget"
+        android:text="@string/text_number_of_episodes"
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_poster"
-        app:layout_constraintTop_toBottomOf="@+id/budget" />
+        app:layout_constraintStart_toEndOf="@+id/cv_poster_tv"
+        app:layout_constraintTop_toBottomOf="@+id/number_of_episodes_tv" />
 
     <TextView
-        android:id="@+id/revenue"
+        android:id="@+id/number_of_seasons_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="start"
         android:maxLines="1"
-        android:textStyle="bold"
-        android:text="@string/text_revenue"
+        android:text="@string/text_number_of_seasons"
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_poster"
-        app:layout_constraintTop_toBottomOf="@+id/tv_budget" />
+        app:layout_constraintStart_toEndOf="@+id/cv_poster_tv"
+        app:layout_constraintTop_toBottomOf="@+id/tv_number_of_episodes_tv" />
 
     <TextView
-        android:id="@+id/tv_revenue"
+        android:id="@+id/tv_number_of_seasons_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:maxLines="1"
-        android:text="@string/text_revenue"
+        android:text="@string/text_number_of_seasons"
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_poster"
-        app:layout_constraintTop_toBottomOf="@+id/revenue" />
+        app:layout_constraintStart_toEndOf="@+id/cv_poster_tv"
+        app:layout_constraintTop_toBottomOf="@+id/number_of_seasons_tv" />
 
     <TextView
-        android:id="@+id/overview"
+        android:id="@+id/overview_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -233,10 +234,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_backdrop" />
+        app:layout_constraintTop_toBottomOf="@+id/img_backdrop_tv" />
 
     <TextView
-        android:id="@+id/tv_overview"
+        android:id="@+id/tv_overview_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -245,11 +246,11 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/overview"
+        app:layout_constraintTop_toBottomOf="@+id/overview_tv"
         tools:text="Overview" />
 
     <TextView
-        android:id="@+id/cast"
+        android:id="@+id/cast_tv"
         style="@style/Theme.MovieCatalogueSpacing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -261,15 +262,104 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_overview" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_overview_tv" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_cast"
+        android:id="@+id/rv_cast_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cast"
+        app:layout_constraintTop_toBottomOf="@id/cast_tv"
         tools:listitem="@layout/items_cast" />
+
+    <TextView
+        android:id="@+id/last_episode_to_air_tv"
+        style="@style/Theme.MovieCatalogueSpacing"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="start"
+        android:text="@string/text_last_episode_to_air"
+        android:textColor="@color/colorText"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_cast_tv" />
+
+    <androidx.cardview.widget.CardView
+        style="@style/Theme.MovieCatalogueSpacingMargin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:elevation="0dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/last_episode_to_air_tv">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_poster_season_tv"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ic_baseline_photo"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_name_season_tv"
+                    style="@style/Theme.MovieCatalogueSpacing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textColor="@color/colorText"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_date_season_tv"
+                    style="@style/Theme.MovieCatalogueSpacing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textColor="@color/colorText"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_total_season_tv"
+                    style="@style/Theme.MovieCatalogueSpacing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start"
+                    android:textColor="@color/colorText"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/tv_overview_season_tv"
+                    style="@style/Theme.MovieCatalogueSpacing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start"
+                    android:maxLines="3"
+                    android:textColor="@color/colorText"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">MovieCatalogue</string>
 
-    <string name="text_tab1">Movie</string>
-    <string name="text_tab2">Tv Show</string>
+    <string name="text_main_tab1">Movie</string>
+    <string name="text_main_tab2">Tv Show</string>
     <string name="text_detail_movie">Detail Movie</string>
     <string name="text_overview">Overview</string>
     <string name="text_status">Status</string>
     <string name="text_top_billed_cast">Top Billed Cast</string>
     <string name="text_budget">Budget</string>
     <string name="text_revenue">Revenue</string>
+    <string name="text_number_of_seasons">Number Of Seasons</string>
+    <string name="text_number_of_episodes">Number Of Episodes</string>
+    <string name="text_last_episode_to_air">Last Episode To Air</string>
+    <string name="text_episodes">%s Episodes</string>
 </resources>

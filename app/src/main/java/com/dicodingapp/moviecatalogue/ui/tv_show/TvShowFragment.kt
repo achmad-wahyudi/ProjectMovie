@@ -1,4 +1,4 @@
-package com.dicodingapp.moviecatalogue.ui.movie
+package com.dicodingapp.moviecatalogue.ui.tv_show
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,19 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dicodingapp.moviecatalogue.databinding.FragmentMovieBinding
+import com.dicodingapp.moviecatalogue.databinding.FragmentTvShowBinding
 
-class MovieFragment : Fragment() {
+class TvShowFragment : Fragment() {
 
-    private lateinit var fragmentMovieBinding: FragmentMovieBinding
+    private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        fragmentMovieBinding = FragmentMovieBinding.inflate(layoutInflater, container, false)
-        return fragmentMovieBinding.root
+        fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
+        return fragmentTvShowBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,15 +28,15 @@ class MovieFragment : Fragment() {
             val viewModel = ViewModelProvider(
                 this,
                 ViewModelProvider.NewInstanceFactory()
-            )[MovieViewModel::class.java]
-            val movie = viewModel.getMovies()
+            )[TvShowViewModel::class.java]
+            val tvShow = viewModel.getTvShow()
 
-            val movieAdapter = MovieAdapter()
-            movieAdapter.setMovies(movie)
-            with(fragmentMovieBinding.rvMovie) {
+            val tvShowAdapter = TvShowAdapter()
+            tvShowAdapter.setTvShows(tvShow)
+            with(fragmentTvShowBinding.rvTvShow) {
                 layoutManager = GridLayoutManager(context, 2)
                 setHasFixedSize(true)
-                adapter = movieAdapter
+                adapter = tvShowAdapter
             }
         }
     }
