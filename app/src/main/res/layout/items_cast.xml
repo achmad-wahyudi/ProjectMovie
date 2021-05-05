@@ -24,8 +24,8 @@
             android:id="@+id/img_poster"
             android:layout_width="150dp"
             android:layout_height="200dp"
-            android:src="@drawable/ic_baseline_photo"
-            tools:ignore="ContentDescription" />
+            android:contentDescription="@string/content_desc_poster"
+            android:src="@drawable/ic_baseline_photo" />
     </androidx.cardview.widget.CardView>
 
     <TextView

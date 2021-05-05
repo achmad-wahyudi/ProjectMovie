@@ -32,21 +32,15 @@
         app:layout_constraintTop_toBottomOf="@id/iv_logo"
         tools:text="Name" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:padding="10dp"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/tv_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            tools:text="Version" />
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Version" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

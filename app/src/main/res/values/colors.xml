@@ -2,17 +2,13 @@
 <resources>
     <color name="colorPrimary">#3E5C76</color>
     <color name="colorPrimaryDark">#1D2D44</color>
-    <color name="colorPrimaryDark2">#0D1321</color>
     <color name="colorPrimaryDark70">#B31D2D44</color>
     <color name="colorAccent">#FFED66</color>
 
     <color name="colorText">#222222</color>
 
-    <color name="colorYellow">#FFEB3B</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorRed">#FF5E5B</color>
-    <color name="colorLightGray">#D8D8D8</color>
 
     <color name="colorRipple">#C2C2C2</color>
 </resources>

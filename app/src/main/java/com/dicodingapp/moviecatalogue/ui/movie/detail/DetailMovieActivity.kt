@@ -68,15 +68,7 @@ class DetailMovieActivity : AppCompatActivity() {
         val vote = (movieEntity.voteAverage * 10).toInt()
         detailContentBinding.tvVote.text = "${vote}%"
 
-        var genres = ""
-        for (genresEntity in movieEntity.genres) {
-            genres += if (genres.isEmpty()) {
-                genresEntity.genreName
-            } else {
-                ", ${genresEntity.genreName}"
-            }
-        }
-        detailContentBinding.tvGenre.text = genres
+        detailContentBinding.tvGenre.text = movieEntity.genres.joinToString(", ")
 
         try {
             val resources = this.resources.getIdentifier(
