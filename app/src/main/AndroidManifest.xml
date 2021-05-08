@@ -15,7 +15,7 @@
         tools:ignore="AllowBackup">
         <activity
             android:name=".ui.SplashActivity"
-            android:theme="@style/Theme.MovieCatalogue">
+            android:theme="@style/Theme.MovieCatalogueFullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,11 +24,8 @@
         </activity>
         <activity android:name=".ui.home.HomeActivity" />
         <activity
-            android:name=".ui.movie.detail.DetailMovieActivity"
-            android:theme="@style/Theme.MovieCatalogue" />
-        <activity
-            android:name=".ui.tv_show.detail.DetailTvShowActivity"
-            android:theme="@style/Theme.MovieCatalogue" />
+            android:name=".ui.detail.DetailFilmActivity"
+            android:theme="@style/Theme.MovieCatalogueFullscreen" />
     </application>
 
 </manifest>

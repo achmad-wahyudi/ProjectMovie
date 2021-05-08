@@ -1,18 +1,19 @@
 package com.dicodingapp.moviecatalogue.ui.tv_show.detail
 
+import com.dicodingapp.moviecatalogue.ui.detail.DetailFilmViewModel
 import com.dicodingapp.moviecatalogue.utils.DataDummy
 import junit.framework.TestCase
 import org.junit.Before
 import org.junit.Test
 
 class DetailTvShowViewModelTest {
-    private lateinit var viewModel: DetailTvShowViewModel
+    private lateinit var viewModel: DetailFilmViewModel
     private val dummyTvShow = DataDummy.generateDummyTvShow()[0]
     private val tvShowId = dummyTvShow.tvShowId
 
     @Before
     fun setUp() {
-        viewModel = DetailTvShowViewModel()
+        viewModel = DetailFilmViewModel()
         viewModel.setSelectedTvShow(tvShowId)
     }
 

@@ -1,4 +1,4 @@
-package com.dicodingapp.moviecatalogue.ui.movie.detail
+package com.dicodingapp.moviecatalogue.ui.detail
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

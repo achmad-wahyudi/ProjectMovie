@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.dicodingapp.moviecatalogue.R
 import com.dicodingapp.moviecatalogue.data.TvShowEntity
 import com.dicodingapp.moviecatalogue.databinding.ItemsTvShowBinding
-import com.dicodingapp.moviecatalogue.ui.tv_show.detail.DetailTvShowActivity
+import com.dicodingapp.moviecatalogue.ui.detail.DetailFilmActivity
 import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefault
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
@@ -47,8 +47,8 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
                 tvItemVoteTv.text = "${vote}%"
 
                 itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailTvShowActivity::class.java)
-                    intent.putExtra(DetailTvShowActivity.EXTRA_TV_SHOW, tvShow.tvShowId)
+                    val intent = Intent(itemView.context, DetailFilmActivity::class.java)
+                    intent.putExtra(DetailFilmActivity.EXTRA_TV_SHOW, tvShow.tvShowId)
                     itemView.context.startActivity(intent)
                 }
                 try {

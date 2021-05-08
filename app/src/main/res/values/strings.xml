@@ -4,6 +4,7 @@
     <string name="text_main_tab1">Movie</string>
     <string name="text_main_tab2">Tv Show</string>
     <string name="text_detail_movie">Detail Movie</string>
+    <string name="text_detail_tv_show">Detail Tv Show</string>
     <string name="text_overview">Overview</string>
     <string name="text_status">Status</string>
     <string name="text_top_billed_cast">Top Billed Cast</string>

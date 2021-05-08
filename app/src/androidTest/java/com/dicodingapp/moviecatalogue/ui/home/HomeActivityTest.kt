@@ -71,14 +71,7 @@ class HomeActivityTest {
             )
         )
 
-        var genres = ""
-        for (genresEntity in dummyMovie[0].genres) {
-            genres += if (genres.isEmpty()) {
-                genresEntity.genreName
-            } else {
-                ", ${genresEntity.genreName}"
-            }
-        }
+        val genres = dummyMovie[0].genres.joinToString { ", ${it.genreName}" }
         onView(withId(R.id.tv_genre)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_genre)).check(matches(withText(genres)))
 
@@ -111,29 +104,29 @@ class HomeActivityTest {
                 click()
             )
         )
-        onView(withId(R.id.tv_title_tv)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_title_tv)).check(matches(withText(dummyTvShow[0].name)))
-        onView(withId(R.id.tv_date_tv)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_date_tv)).check(matches(withText(dummyTvShow[0].firstAirDate)))
-        onView(withId(R.id.tv_status_tv)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_status_tv)).check(matches(withText(dummyTvShow[0].status)))
-        onView(withId(R.id.tv_tag_line_tv)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_tag_line_tv)).check(matches(withText(dummyTvShow[0].tagLine)))
-        onView(withId(R.id.tv_vote_tv)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_title)).check(matches(withText(dummyTvShow[0].name)))
+        onView(withId(R.id.tv_date)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_date)).check(matches(withText(dummyTvShow[0].firstAirDate)))
+        onView(withId(R.id.tv_status)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_status)).check(matches(withText(dummyTvShow[0].status)))
+        onView(withId(R.id.tv_tag_line)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_tag_line)).check(matches(withText(dummyTvShow[0].tagLine)))
+        onView(withId(R.id.tv_vote)).check(matches(isDisplayed()))
         val vote = (dummyTvShow[0].voteAverage * 10).toInt()
-        onView(withId(R.id.tv_vote_tv)).check(matches(withText("${vote}%")))
-        onView(withId(R.id.tv_overview_tv)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_overview_tv)).check(matches(withText(dummyTvShow[0].overview)))
-        onView(withId(R.id.tv_number_of_episodes_tv)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_number_of_episodes_tv)).check(
+        onView(withId(R.id.tv_vote)).check(matches(withText("${vote}%")))
+        onView(withId(R.id.tv_overview)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_overview)).check(matches(withText(dummyTvShow[0].overview)))
+        onView(withId(R.id.tv_number_of_episodes)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_number_of_episodes)).check(
             matches(
                 withText(
                     Converting.formatNumber(dummyTvShow[0].numberOfEpisodes.toString())
                 )
             )
         )
-        onView(withId(R.id.tv_number_of_seasons_tv)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_number_of_seasons_tv)).check(
+        onView(withId(R.id.tv_number_of_seasons)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_number_of_seasons)).check(
             matches(
                 withText(
                     Converting.formatNumber(dummyTvShow[0].numberOfSeasons.toString())
@@ -141,19 +134,12 @@ class HomeActivityTest {
             )
         )
 
-        var genres = ""
-        for (genresEntity in dummyTvShow[0].genres) {
-            genres += if (genres.isEmpty()) {
-                genresEntity.genreName
-            } else {
-                ", ${genresEntity.genreName}"
-            }
-        }
-        onView(withId(R.id.tv_genre_tv)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_genre_tv)).check(matches(withText(genres)))
+        val genres = dummyTvShow[0].genres.joinToString { ", ${it.genreName}" }
+        onView(withId(R.id.tv_genre)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_genre)).check(matches(withText(genres)))
 
-        onView(withId(R.id.rv_cast_tv)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_cast_tv)).perform(
+        onView(withId(R.id.rv_cast)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_cast)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
                 dummyTvShow[0].casts.size
             )

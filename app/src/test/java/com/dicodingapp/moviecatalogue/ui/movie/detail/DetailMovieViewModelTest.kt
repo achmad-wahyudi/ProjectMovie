@@ -1,5 +1,6 @@
 package com.dicodingapp.moviecatalogue.ui.movie.detail
 
+import com.dicodingapp.moviecatalogue.ui.detail.DetailFilmViewModel
 import com.dicodingapp.moviecatalogue.utils.DataDummy
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
@@ -7,13 +8,13 @@ import org.junit.Before
 import org.junit.Test
 
 class DetailMovieViewModelTest {
-    private lateinit var viewModel: DetailMovieViewModel
+    private lateinit var viewModel: DetailFilmViewModel
     private val dummyMovie = DataDummy.generateDummyMovie()[0]
     private val movieId = dummyMovie.movieId
 
     @Before
     fun setUp() {
-        viewModel = DetailMovieViewModel()
+        viewModel = DetailFilmViewModel()
         viewModel.setSelectedMovie(movieId)
     }
 
