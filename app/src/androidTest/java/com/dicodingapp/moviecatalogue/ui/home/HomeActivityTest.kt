@@ -1,24 +1,35 @@
 package com.dicodingapp.moviecatalogue.ui.home
 
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.dicodingapp.moviecatalogue.R
 import com.dicodingapp.moviecatalogue.utils.Converting
 import com.dicodingapp.moviecatalogue.utils.DataDummy
-import org.junit.Rule
+import com.dicodingapp.moviecatalogue.utils.EspressoIdlingResource
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
 class HomeActivityTest {
     private val dummyMovie = DataDummy.generateDummyMovie()
     private val dummyTvShow = DataDummy.generateDummyTvShow()
 
-    @get:Rule
-    var activityRule = ActivityScenarioRule(HomeActivity::class.java)
+    @Before
+    fun setUp() {
+        ActivityScenario.launch(HomeActivity::class.java)
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingResource)
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idlingResource)
+    }
 
     @Test
     fun loadMovie() {
@@ -71,16 +82,9 @@ class HomeActivityTest {
             )
         )
 
-        val genres = dummyMovie[0].genres.joinToString { ", ${it.genreName}" }
+        val genres = dummyMovie[0].genres.joinToString { it.genreName }
         onView(withId(R.id.tv_genre)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_genre)).check(matches(withText(genres)))
-
-        onView(withId(R.id.rv_cast)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_cast)).perform(
-            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
-                dummyMovie[0].casts.size
-            )
-        )
     }
 
     @Test
@@ -134,15 +138,8 @@ class HomeActivityTest {
             )
         )
 
-        val genres = dummyTvShow[0].genres.joinToString { ", ${it.genreName}" }
+        val genres = dummyTvShow[0].genres.joinToString { it.genreName }
         onView(withId(R.id.tv_genre)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_genre)).check(matches(withText(genres)))
-
-        onView(withId(R.id.rv_cast)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_cast)).perform(
-            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
-                dummyTvShow[0].casts.size
-            )
-        )
     }
 }

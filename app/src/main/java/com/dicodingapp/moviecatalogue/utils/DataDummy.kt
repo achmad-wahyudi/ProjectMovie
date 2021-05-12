@@ -1,6 +1,7 @@
 package com.dicodingapp.moviecatalogue.utils
 
 import com.dicodingapp.moviecatalogue.data.*
+import com.dicodingapp.moviecatalogue.data.source.remote.network.response.*
 
 object DataDummy {
 
@@ -9,75 +10,36 @@ object DataDummy {
         val movies = ArrayList<MovieEntity>()
 
         var listGenresEntity = ArrayList<GenresEntity>()
-        listGenresEntity.add(GenresEntity("18", "Drama"))
-        listGenresEntity.add(GenresEntity("10749", "Romance"))
-        listGenresEntity.add(GenresEntity("10402", "Music"))
+        listGenresEntity.add(GenresEntity("18", "Action"))
+        listGenresEntity.add(GenresEntity("10749", "Adventure"))
+        listGenresEntity.add(GenresEntity("10402", "Thriller"))
+        listGenresEntity.add(GenresEntity("10402", "War"))
 
         var listCastEntity = ArrayList<CastEntity>()
         listCastEntity.add(
             CastEntity(
-                "51329",
-                "Bradley Cooper",
-                "Jackson Maine",
-                "/DPnessSsWqVXRbKm93PtMjB4Us.jpg"
-            )
-        )
-        listCastEntity.add(
-            CastEntity(
-                "237405",
-                "Lady Gaga",
-                "Ally Campana",
-                "/asB6CImOsNGA5i9HHt2FFCtP2QJ.jpg"
-            )
-        )
-        listCastEntity.add(
-            CastEntity(
-                "16431",
-                "Sam Elliott",
-                "Bobby Maine",
-                "/1K2IvGXFbKsgkExuUsRvy4F0c9e.jpg"
-            )
-        )
-        listCastEntity.add(
-            CastEntity(
-                "57906",
-                "Andrew Dice Clay",
-                "Lorenzo Campana",
-                "/kq6APbPUbx0Mzoh6mK7k8Xoiw5m.jpg"
-            )
-        )
-        listCastEntity.add(
-            CastEntity(
-                "21660",
-                "Rafi Gavron",
-                "Rez Gavron",
-                "/avCWoO9fLwEhbT6cvu0TJcSj49g.jpg"
-            )
-        )
-        listCastEntity.add(
-            CastEntity(
-                "1560244",
-                "Anthony Ramos",
-                "Ramon",
-                "/ityTHqIXFT3laID4j4ptlnc84zq.jpg"
+                "973667",
+                "Rosa Salazar",
+                "Alita",
+                "/pc2tCeB99HtmrghAoPKksZkbzUU.jpg"
             )
         )
 
         movies.add(
             MovieEntity(
                 listGenresEntity,
-                "332562",
-                "A Star Is Born",
-                "2018-10-03",
+                "567189",
+                "Tom Clancy's Without Remorse",
+                "2021-04-29",
                 "Released",
                 "",
-                7.5,
-                "poster_a_start_is_born",
-                "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
-                "/mnDvPokXpvsdPcWSjNRPhiiLOKu.jpg",
-                listCastEntity,
-                36000000,
-                433888866
+                7.3,
+                "/rEm96ib0sPiZBADNKBHKBv5bve9.jpg",
+                "An elite Navy SEAL uncovers an international conspiracy while seeking justice for the murder of his pregnant wife.",
+                "/fPGeS6jgdLovQAKunNHX8l0avCy.jpg",
+                null,
+                0,
+                0
             )
         )
 
@@ -943,64 +905,40 @@ object DataDummy {
         val tvShow = ArrayList<TvShowEntity>()
 
         var listGenresEntity = ArrayList<GenresEntity>()
-        listGenresEntity.add(GenresEntity("80", "Crime"))
-        listGenresEntity.add(GenresEntity("18", "Drama"))
-        listGenresEntity.add(GenresEntity("9648", "Mystery"))
-        listGenresEntity.add(GenresEntity("10759", "Action & Adventure"))
+        listGenresEntity.add(GenresEntity("80", "Sci-Fi & Fantasy"))
+        listGenresEntity.add(GenresEntity("18", "Action & Adventure"))
+        listGenresEntity.add(GenresEntity("9648", "Drama"))
+        listGenresEntity.add(GenresEntity("10759", "War & Politics"))
 
         var listCastEntity = ArrayList<CastEntity>()
-        listCastEntity.add(
-            CastEntity(
-                "76110",
-                "Stephen Amell",
-                "Oliver Queen / Green Arrow",
-                "/gN8cpnUaPIzWhVufahmzV0dwOgp.jpg"
-            )
-        )
-        listCastEntity.add(
-            CastEntity(
-                "116774",
-                "David Ramsey",
-                "John Diggle / Spartan",
-                "/bZWO7WfBYI8iojTFozzqN2X3RWL.jpg"
-            )
-        )
-        listCastEntity.add(
-            CastEntity(
-                "55775",
-                "Katie Cassidy",
-                "Laurel Lance / Black Canary",
-                "/mcRo6KyzYOE7prr01mTd5b2TstI.jpg"
-            )
-        )
 
         var tvShowLastEpisodeEntity = TvShowLastEpisodeEntity(
-            "2012-10-10",
-            "10",
-            "1973846",
-            "Fadeout",
-            "After eight seasons, and the launch of countless superheroes, the series wraps up the story of the Green Arrow.",
-            "8",
-            "/x2uJkULqhVhosfjlqTknZtv1QyZ.jpg",
+            "2021-04-23",
+            "6",
+            "2558743",
+            "One World, One People",
+            "As The Flag Smashers escalate their efforts, Sam and Bucky take action.",
+            "1",
+            "/qXxCqMP7aj3rGndhVfGUyyU6hyq.jpg",
         )
 
         tvShow.add(
             TvShowEntity(
-                "/vNnLAKmoczRlNarxyGrrw0KSOeX.jpg",
-                "2012-10-10",
+                "/b0WmHGc8LHTdGCVzxRb3IBMur57.jpg",
+                "2021-03-19",
                 listGenresEntity,
-                "1412",
-                "2020-01-28",
+                "88396",
+                "2021-04-23",
                 tvShowLastEpisodeEntity,
-                "Arrow",
-                170,
-                8,
-                "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
-                "poster_arrow",
+                "The Falcon and the Winter Soldier",
+                6,
+                1,
+                "Following the events of “Avengers: Endgame”, the Falcon, Sam Wilson and the Winter Soldier, Bucky Barnes team up in a global adventure that tests their abilities, and their patience.",
+                "/6kbAMLteGO8yyewYau6bJ683sw7.jpg",
                 "Ended",
-                "Heroes fall. Legends rise.",
-                "Scripted",
-                6.6,
+                "Honor the shield.",
+                "Miniseries",
+                7.9,
                 listCastEntity
             )
         )
@@ -1532,5 +1470,136 @@ object DataDummy {
         )
 
         return tvShow
+    }
+
+    fun generateRemoteDummyMovie(): List<ResultsItem> {
+        val resultsItem = ArrayList<ResultsItem>()
+        val resultItem = ResultsItem(
+            "An elite Navy SEAL uncovers an international conspiracy while seeking justice for the murder of his pregnant wife.",
+            "en",
+            "Tom Clancy's Without Remorse",
+            false,
+            "Tom Clancy's Without Remorse",
+            emptyList(),
+            "/rEm96ib0sPiZBADNKBHKBv5bve9.jpg",
+            "",
+            "",
+            5972.653,
+            7.3,
+            567189,
+            false,
+            726
+        )
+        resultsItem.add(resultItem)
+        return resultsItem
+    }
+
+    fun generateRemoteDummyDetailMovie(): MovieDetailResponse {
+        return MovieDetailResponse(
+            "en",
+            "tt0499097",
+            false,
+            "Tom Clancy's Without Remorse",
+            "/fPGeS6jgdLovQAKunNHX8l0avCy.jpg",
+            0,
+            emptyList(),
+            5972.653,
+            emptyList(),
+            567189,
+            732,
+            0,
+            "An elite Navy SEAL uncovers an international conspiracy while seeking justice for the murder of his pregnant wife.",
+            "Tom Clancy's Without Remorse",
+            109,
+            "/rEm96ib0sPiZBADNKBHKBv5bve9.jpg",
+            emptyList(),
+            emptyList(),
+            "2021-04-29",
+            7.3,
+            "",
+            "",
+            false,
+            "",
+            "Released",
+        )
+    }
+
+    fun generateRemoteDummyTvShow(): List<ResultsItemTvShow> {
+        val resultsItem = ArrayList<ResultsItemTvShow>()
+        val resultItem = ResultsItemTvShow(
+            "2021-03-19",
+            "Following the events of “Avengers: Endgame”, the Falcon, Sam Wilson and the Winter Soldier, Bucky Barnes team up in a global adventure that tests their abilities, and their patience.",
+            "",
+            emptyList(),
+            "/6kbAMLteGO8yyewYau6bJ683sw7.jpg",
+            emptyList(),
+            "/b0WmHGc8LHTdGCVzxRb3IBMur57.jpg",
+            "The Falcon and the Winter Soldier",
+            0.0,
+            7.9,
+            "The Falcon and the Winter Soldier",
+            88396,
+            0
+        )
+        resultsItem.add(resultItem)
+        return resultsItem
+    }
+
+    fun generateRemoteDummyDetailTvShow(): TvShowDetailResponse {
+        val listGenresItem = ArrayList<GenresItem>()
+        listGenresItem.add(
+            GenresItem(
+                "Sci-Fi & Fantasy",
+                10765
+            )
+        )
+        listGenresItem.add(
+            GenresItem(
+                "Action & Adventure",
+                10759
+            )
+        )
+        listGenresItem.add(
+            GenresItem(
+                "Drama",
+                18
+            )
+        )
+        listGenresItem.add(
+            GenresItem(
+                "War & Politics",
+                10768
+            )
+        )
+
+        val lastEpisodeToAir = LastEpisodeToAir(
+            "2021-04-23",
+            "As The Flag Smashers escalate their efforts, Sam and Bucky take action.",
+            6,
+            7.167,
+            "One World, One People",
+            1,
+            2558743,
+            "/qXxCqMP7aj3rGndhVfGUyyU6hyq.jpg",
+            6
+        )
+        return TvShowDetailResponse(
+            6,
+            "tt0499097",
+            "/b0WmHGc8LHTdGCVzxRb3IBMur57.jpg",
+            listGenresItem,
+            88396,
+            1,
+            "2021-03-19",
+            "An elite Navy SEAL uncovers an international conspiracy while seeking justice for the murder of his pregnant wife.",
+            lastEpisodeToAir,
+            "/6kbAMLteGO8yyewYau6bJ683sw7.jpg",
+            "The Falcon and the Winter Soldier",
+            7.9,
+            "The Falcon and the Winter Soldier",
+            "Honor the shield.",
+            "2021-04-23",
+            "Ended",
+        )
     }
 }

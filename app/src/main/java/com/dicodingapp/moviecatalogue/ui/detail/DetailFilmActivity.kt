@@ -4,19 +4,19 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.dicodingapp.moviecatalogue.R
 import com.dicodingapp.moviecatalogue.data.MovieEntity
 import com.dicodingapp.moviecatalogue.data.TvShowEntity
+import com.dicodingapp.moviecatalogue.data.source.remote.network.ApiConfig
 import com.dicodingapp.moviecatalogue.databinding.ActivityDetailFilmBinding
 import com.dicodingapp.moviecatalogue.databinding.ContentDetailFilmBinding
 import com.dicodingapp.moviecatalogue.utils.Converting
 import com.dicodingapp.moviecatalogue.utils.Converting.formatDollar
-import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefault
 import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefaultBackdrop
+import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefaultPoster
+import com.dicodingapp.moviecatalogue.viewmodel.ViewModelFactory
 
 class DetailFilmActivity : AppCompatActivity() {
 
@@ -38,24 +38,37 @@ class DetailFilmActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        val factory = ViewModelFactory.getInstance(ApiConfig.provideApiService())
         val viewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            factory
         )[DetailFilmViewModel::class.java]
 
         val extras = intent.extras
         if (extras != null) {
             val movieId = extras.getString(EXTRA_MOVIE)
             if (movieId != null) {
-                viewModel.setSelectedMovie(movieId)
                 activityDetailBinding.tvDetail.text = getString(R.string.text_detail_movie)
-                populateMovie(viewModel.getMovie())
+
+                activityDetailBinding.progressBar.visibility = View.VISIBLE
+                activityDetailBinding.content.visibility = View.GONE
+                viewModel.getMovie(movieId).observe(this, { movies ->
+                    activityDetailBinding.progressBar.visibility = View.GONE
+                    activityDetailBinding.content.visibility = View.VISIBLE
+                    populateMovie(movies)
+                })
             }
             val tvShowId = extras.getString(EXTRA_TV_SHOW)
             if (tvShowId != null) {
-                viewModel.setSelectedTvShow(tvShowId)
                 activityDetailBinding.tvDetail.text = getString(R.string.text_detail_tv_show)
-                populateTvShow(viewModel.getTvShow())
+
+                activityDetailBinding.progressBar.visibility = View.VISIBLE
+                activityDetailBinding.content.visibility = View.GONE
+                viewModel.getTvShow(tvShowId).observe(this, { tvShow ->
+                    activityDetailBinding.progressBar.visibility = View.GONE
+                    activityDetailBinding.content.visibility = View.VISIBLE
+                    populateTvShow(tvShow)
+                })
             }
         }
     }
@@ -78,30 +91,13 @@ class DetailFilmActivity : AppCompatActivity() {
         val vote = (movieEntity.voteAverage * 10).toInt()
         detailContentBinding.tvVote.text = "${vote}%"
 
-        detailContentBinding.tvGenre.text = movieEntity.genres.joinToString { ", ${it.genreName}" }
+        detailContentBinding.tvGenre.text = movieEntity.genres.joinToString { it.genreName }
 
-        try {
-            val resources = this.resources.getIdentifier(
-                movieEntity.posterPath,
-                "drawable",
-                this.packageName
-            )
-            setImageDefault(
-                this,
-                resources,
-                detailContentBinding.imgPoster
-            )
-        } catch (e: Exception) {
-            Glide.with(this)
-                .load(
-                    ContextCompat.getDrawable(
-                        this,
-                        R.drawable.ic_broken_image_black
-                    )
-                )
-                .into(detailContentBinding.imgPoster)
-            e.printStackTrace()
-        }
+        setImageDefaultPoster(
+            this,
+            movieEntity.posterPath,
+            detailContentBinding.imgPoster
+        )
 
         setImageDefaultBackdrop(
             this,
@@ -141,30 +137,13 @@ class DetailFilmActivity : AppCompatActivity() {
         val vote = (tvShowEntity.voteAverage * 10).toInt()
         detailContentBinding.tvVote.text = "${vote}%"
 
-        detailContentBinding.tvGenre.text = tvShowEntity.genres.joinToString { ", ${it.genreName}" }
+        detailContentBinding.tvGenre.text = tvShowEntity.genres.joinToString { it.genreName }
 
-        try {
-            val resources = this.resources.getIdentifier(
-                tvShowEntity.posterPath,
-                "drawable",
-                this.packageName
-            )
-            setImageDefault(
-                this,
-                resources,
-                detailContentBinding.imgPoster
-            )
-        } catch (e: Exception) {
-            Glide.with(this)
-                .load(
-                    ContextCompat.getDrawable(
-                        this,
-                        R.drawable.ic_broken_image_black
-                    )
-                )
-                .into(detailContentBinding.imgPoster)
-            e.printStackTrace()
-        }
+        setImageDefaultPoster(
+            this,
+            tvShowEntity.posterPath,
+            detailContentBinding.imgPoster
+        )
 
         setImageDefaultBackdrop(
             this,
@@ -182,14 +161,14 @@ class DetailFilmActivity : AppCompatActivity() {
 
         detailContentBinding.lastEpisodeToAir.visibility = View.VISIBLE
         detailContentBinding.cvLastEpisode.visibility = View.VISIBLE
-        detailContentBinding.tvNameSeason.text = tvShowEntity.lastEpisodeToAir.name
-        detailContentBinding.tvDateSeason.text = tvShowEntity.lastEpisodeToAir.air_date
+        detailContentBinding.tvNameSeason.text = tvShowEntity.lastEpisodeToAir?.name
+        detailContentBinding.tvDateSeason.text = tvShowEntity.lastEpisodeToAir?.air_date
         detailContentBinding.tvTotalSeason.text =
-            getString(R.string.text_episodes, tvShowEntity.lastEpisodeToAir.episodeNumber)
-        detailContentBinding.tvOverviewSeason.text = tvShowEntity.lastEpisodeToAir.overview
+            getString(R.string.text_episodes, tvShowEntity.lastEpisodeToAir?.episodeNumber)
+        detailContentBinding.tvOverviewSeason.text = tvShowEntity.lastEpisodeToAir?.overview
         setImageDefaultBackdrop(
             this,
-            tvShowEntity.lastEpisodeToAir.stillPath,
+            tvShowEntity.lastEpisodeToAir?.stillPath,
             detailContentBinding.imgPosterSeason
         )
     }

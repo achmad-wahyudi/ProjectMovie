@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.dicodingapp.moviecatalogue.data.source.remote.network.ApiConfig
 import com.dicodingapp.moviecatalogue.databinding.FragmentMovieBinding
+import com.dicodingapp.moviecatalogue.viewmodel.ViewModelFactory
 
 class MovieFragment : Fragment() {
 
@@ -25,14 +27,22 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
+            val factory = ViewModelFactory.getInstance(ApiConfig.provideApiService())
             val viewModel = ViewModelProvider(
                 this,
-                ViewModelProvider.NewInstanceFactory()
+                factory
             )[MovieViewModel::class.java]
-            val movie = viewModel.getMovies()
 
             val movieAdapter = MovieAdapter()
-            movieAdapter.setMovies(movie)
+
+            fragmentMovieBinding.progressBar.visibility = View.VISIBLE
+            fragmentMovieBinding.rvMovie.visibility = View.GONE
+            viewModel.getMovies().observe(viewLifecycleOwner, { movies ->
+                fragmentMovieBinding.progressBar.visibility = View.GONE
+                fragmentMovieBinding.rvMovie.visibility = View.VISIBLE
+                movieAdapter.setMovies(movies)
+                movieAdapter.notifyDataSetChanged()
+            })
             with(fragmentMovieBinding.rvMovie) {
                 layoutManager = GridLayoutManager(context, 2)
                 setHasFixedSize(true)

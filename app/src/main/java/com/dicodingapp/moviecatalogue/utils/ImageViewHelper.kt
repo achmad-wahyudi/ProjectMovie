@@ -9,17 +9,18 @@ import com.bumptech.glide.request.RequestOptions
 import com.dicodingapp.moviecatalogue.R
 
 object ImageViewHelper {
-    fun setImageDefault(activity: Context, image: Int?, ivPhoto: ImageView?) {
+    fun setImageDefaultPoster(activity: Context, image: String?, ivPhoto: ImageView?) {
         try {
+            val imageNew = ConstHelper.TEXT_URL_IMAGE + image
             val requestOption: RequestOptions = RequestOptions()
                 .placeholder(R.drawable.ic_baseline_photo)
                 .centerCrop()
             Glide.with(activity)
-                .load(image)
+                .load(imageNew)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .thumbnail(
                     Glide.with(activity)
-                        .load(image)
+                        .load(imageNew)
                         .apply(requestOption)
                 )
                 .apply(requestOption)

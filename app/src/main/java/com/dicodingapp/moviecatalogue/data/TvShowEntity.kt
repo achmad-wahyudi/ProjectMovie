@@ -6,7 +6,7 @@ data class TvShowEntity(
     var genres: List<GenresEntity>,
     var tvShowId: String,
     var lastAirDate: String,
-    var lastEpisodeToAir: TvShowLastEpisodeEntity,
+    var lastEpisodeToAir: TvShowLastEpisodeEntity?,
     var name: String,
     var numberOfEpisodes: Int,
     var numberOfSeasons: Int,

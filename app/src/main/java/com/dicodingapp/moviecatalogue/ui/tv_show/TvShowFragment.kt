@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.dicodingapp.moviecatalogue.data.source.remote.network.ApiConfig
 import com.dicodingapp.moviecatalogue.databinding.FragmentTvShowBinding
+import com.dicodingapp.moviecatalogue.viewmodel.ViewModelFactory
 
 class TvShowFragment : Fragment() {
 
@@ -25,14 +27,22 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
+            val factory = ViewModelFactory.getInstance(ApiConfig.provideApiService())
             val viewModel = ViewModelProvider(
                 this,
-                ViewModelProvider.NewInstanceFactory()
+                factory
             )[TvShowViewModel::class.java]
-            val tvShow = viewModel.getTvShow()
 
             val tvShowAdapter = TvShowAdapter()
-            tvShowAdapter.setTvShows(tvShow)
+
+            fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
+            fragmentTvShowBinding.rvTvShow.visibility = View.GONE
+            viewModel.getTvShow().observe(viewLifecycleOwner, { tvShows ->
+                fragmentTvShowBinding.progressBar.visibility = View.GONE
+                fragmentTvShowBinding.rvTvShow.visibility = View.VISIBLE
+                tvShowAdapter.setTvShows(tvShows)
+                tvShowAdapter.notifyDataSetChanged()
+            })
             with(fragmentTvShowBinding.rvTvShow) {
                 layoutManager = GridLayoutManager(context, 2)
                 setHasFixedSize(true)

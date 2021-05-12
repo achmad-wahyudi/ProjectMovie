@@ -4,14 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.dicodingapp.moviecatalogue.R
 import com.dicodingapp.moviecatalogue.data.MovieEntity
 import com.dicodingapp.moviecatalogue.databinding.ItemsMovieBinding
 import com.dicodingapp.moviecatalogue.ui.detail.DetailFilmActivity
-import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefault
+import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefaultPoster
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private var listMovies = ArrayList<MovieEntity>()
@@ -52,28 +49,11 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                     intent.putExtra(DetailFilmActivity.EXTRA_MOVIE, movie.movieId)
                     itemView.context.startActivity(intent)
                 }
-                try {
-                    val resources = itemView.context.resources.getIdentifier(
-                        movie.posterPath,
-                        "drawable",
-                        itemView.context.packageName
-                    )
-                    setImageDefault(
-                        itemView.context,
-                        resources,
-                        imgPoster
-                    )
-                } catch (e: Exception) {
-                    Glide.with(itemView.context)
-                        .load(
-                            ContextCompat.getDrawable(
-                                itemView.context,
-                                R.drawable.ic_broken_image_black
-                            )
-                        )
-                        .into(imgPoster)
-                    e.printStackTrace()
-                }
+                setImageDefaultPoster(
+                    itemView.context,
+                    movie.posterPath,
+                    imgPoster
+                )
             }
         }
     }

@@ -11,7 +11,7 @@ data class MovieEntity(
     var posterPath: String,
     var overview: String,
     var backdropPath: String,
-    var casts: List<CastEntity>,
+    var casts: List<CastEntity>?,
     var budget: Int,
     var revenue: Int,
 )

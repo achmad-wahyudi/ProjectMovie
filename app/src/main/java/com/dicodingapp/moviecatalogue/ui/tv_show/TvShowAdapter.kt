@@ -4,14 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.dicodingapp.moviecatalogue.R
 import com.dicodingapp.moviecatalogue.data.TvShowEntity
 import com.dicodingapp.moviecatalogue.databinding.ItemsTvShowBinding
 import com.dicodingapp.moviecatalogue.ui.detail.DetailFilmActivity
-import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefault
+import com.dicodingapp.moviecatalogue.utils.ImageViewHelper
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     private var listTvShows = ArrayList<TvShowEntity>()
@@ -51,28 +48,11 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
                     intent.putExtra(DetailFilmActivity.EXTRA_TV_SHOW, tvShow.tvShowId)
                     itemView.context.startActivity(intent)
                 }
-                try {
-                    val resources = itemView.context.resources.getIdentifier(
-                        tvShow.posterPath,
-                        "drawable",
-                        itemView.context.packageName
-                    )
-                    setImageDefault(
-                        itemView.context,
-                        resources,
-                        imgPosterTv
-                    )
-                } catch (e: Exception) {
-                    Glide.with(itemView.context)
-                        .load(
-                            ContextCompat.getDrawable(
-                                itemView.context,
-                                R.drawable.ic_broken_image_black
-                            )
-                        )
-                        .into(imgPosterTv)
-                    e.printStackTrace()
-                }
+                ImageViewHelper.setImageDefaultPoster(
+                    itemView.context,
+                    tvShow.posterPath,
+                    imgPosterTv
+                )
             }
         }
     }
