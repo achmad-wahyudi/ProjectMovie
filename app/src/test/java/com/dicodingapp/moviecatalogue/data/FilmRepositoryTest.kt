@@ -57,6 +57,7 @@ class FilmRepositoryTest {
         verify(remote)
             .getMovieById(eq(movieId), any())
 
+        assertEquals(movieId.toString(), movieEntitiesContent.movieId)
         assertNotNull(movieEntitiesContent)
         assertNotNull(movieEntitiesContent.movieId)
         assertNotNull(movieEntitiesContent.title)
@@ -89,6 +90,7 @@ class FilmRepositoryTest {
         verify(remote)
             .getTvShowById(eq(tvShowId), any())
 
+        assertEquals(tvShowId.toString(), tvShowEntitiesContent.tvShowId)
         assertNotNull(tvShowEntitiesContent)
         assertNotNull(tvShowEntitiesContent.tvShowId)
         assertNotNull(tvShowEntitiesContent.name)

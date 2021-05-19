@@ -75,101 +75,105 @@ class DetailFilmActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun populateMovie(movieEntity: MovieEntity) {
-        detailContentBinding.tvTitle.text = movieEntity.title
-        detailContentBinding.tvTagLine.text = movieEntity.tagLine
-        detailContentBinding.tvDate.text = movieEntity.releaseDate
-        detailContentBinding.tvOverview.text = movieEntity.overview
-        detailContentBinding.tvStatus.text = movieEntity.status
+        detailContentBinding.apply {
+            tvTitle.text = movieEntity.title
+            tvTagLine.text = movieEntity.tagLine
+            tvDate.text = movieEntity.releaseDate
+            tvOverview.text = movieEntity.overview
+            tvStatus.text = movieEntity.status
 
-        detailContentBinding.budget.visibility = View.VISIBLE
-        detailContentBinding.tvBudget.visibility = View.VISIBLE
-        detailContentBinding.revenue.visibility = View.VISIBLE
-        detailContentBinding.tvRevenue.visibility = View.VISIBLE
-        detailContentBinding.tvBudget.text = formatDollar(movieEntity.budget.toString())
-        detailContentBinding.tvRevenue.text = formatDollar(movieEntity.revenue.toString())
+            budget.visibility = View.VISIBLE
+            tvBudget.visibility = View.VISIBLE
+            revenue.visibility = View.VISIBLE
+            tvRevenue.visibility = View.VISIBLE
+            tvBudget.text = formatDollar(movieEntity.budget.toString())
+            tvRevenue.text = formatDollar(movieEntity.revenue.toString())
 
-        val vote = (movieEntity.voteAverage * 10).toInt()
-        detailContentBinding.tvVote.text = "${vote}%"
+            val vote = (movieEntity.voteAverage * 10).toInt()
+            tvVote.text = "${vote}%"
 
-        detailContentBinding.tvGenre.text = movieEntity.genres.joinToString { it.genreName }
+            tvGenre.text = movieEntity.genres.joinToString { it.genreName }
 
-        setImageDefaultPoster(
-            this,
-            movieEntity.posterPath,
-            detailContentBinding.imgPoster
-        )
+            setImageDefaultPoster(
+                this@DetailFilmActivity,
+                movieEntity.posterPath,
+                imgPoster
+            )
 
-        setImageDefaultBackdrop(
-            this,
-            movieEntity.backdropPath,
-            detailContentBinding.imgBackdrop
-        )
+            setImageDefaultBackdrop(
+                this@DetailFilmActivity,
+                movieEntity.backdropPath,
+                imgBackdrop
+            )
 
-        val castAdapter = CastAdapter()
-        castAdapter.setCasts(movieEntity.casts)
-        with(detailContentBinding.rvCast) {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            setHasFixedSize(true)
-            adapter = castAdapter
+            val castAdapter = CastAdapter()
+            castAdapter.setCasts(movieEntity.casts)
+            with(rvCast) {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                setHasFixedSize(true)
+                adapter = castAdapter
+            }
+
+            lastEpisodeToAir.visibility = View.GONE
+            cvLastEpisode.visibility = View.GONE
         }
-
-        detailContentBinding.lastEpisodeToAir.visibility = View.GONE
-        detailContentBinding.cvLastEpisode.visibility = View.GONE
     }
 
     @SuppressLint("SetTextI18n")
     private fun populateTvShow(tvShowEntity: TvShowEntity) {
-        detailContentBinding.tvTitle.text = tvShowEntity.name
-        detailContentBinding.tvTagLine.text = tvShowEntity.tagLine
-        detailContentBinding.tvDate.text = tvShowEntity.firstAirDate
-        detailContentBinding.tvOverview.text = tvShowEntity.overview
-        detailContentBinding.tvStatus.text = tvShowEntity.status
+        detailContentBinding.apply {
+            tvTitle.text = tvShowEntity.name
+            tvTagLine.text = tvShowEntity.tagLine
+            tvDate.text = tvShowEntity.firstAirDate
+            tvOverview.text = tvShowEntity.overview
+            tvStatus.text = tvShowEntity.status
 
-        detailContentBinding.numberOfEpisodes.visibility = View.VISIBLE
-        detailContentBinding.numberOfSeasons.visibility = View.VISIBLE
-        detailContentBinding.tvNumberOfEpisodes.visibility = View.VISIBLE
-        detailContentBinding.tvNumberOfSeasons.visibility = View.VISIBLE
-        detailContentBinding.tvNumberOfEpisodes.text =
-            Converting.formatNumber(tvShowEntity.numberOfEpisodes.toString())
-        detailContentBinding.tvNumberOfSeasons.text =
-            Converting.formatNumber(tvShowEntity.numberOfSeasons.toString())
+            numberOfEpisodes.visibility = View.VISIBLE
+            numberOfSeasons.visibility = View.VISIBLE
+            tvNumberOfEpisodes.visibility = View.VISIBLE
+            tvNumberOfSeasons.visibility = View.VISIBLE
+            tvNumberOfEpisodes.text =
+                Converting.formatNumber(tvShowEntity.numberOfEpisodes.toString())
+            tvNumberOfSeasons.text =
+                Converting.formatNumber(tvShowEntity.numberOfSeasons.toString())
 
-        val vote = (tvShowEntity.voteAverage * 10).toInt()
-        detailContentBinding.tvVote.text = "${vote}%"
+            val vote = (tvShowEntity.voteAverage * 10).toInt()
+            tvVote.text = "${vote}%"
 
-        detailContentBinding.tvGenre.text = tvShowEntity.genres.joinToString { it.genreName }
+            tvGenre.text = tvShowEntity.genres.joinToString { it.genreName }
 
-        setImageDefaultPoster(
-            this,
-            tvShowEntity.posterPath,
-            detailContentBinding.imgPoster
-        )
+            setImageDefaultPoster(
+                this@DetailFilmActivity,
+                tvShowEntity.posterPath,
+                imgPoster
+            )
 
-        setImageDefaultBackdrop(
-            this,
-            tvShowEntity.backdropPath,
-            detailContentBinding.imgBackdrop
-        )
+            setImageDefaultBackdrop(
+                this@DetailFilmActivity,
+                tvShowEntity.backdropPath,
+                imgBackdrop
+            )
 
-        val castAdapter = CastAdapter()
-        castAdapter.setCasts(tvShowEntity.casts)
-        with(detailContentBinding.rvCast) {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            setHasFixedSize(true)
-            adapter = castAdapter
+            val castAdapter = CastAdapter()
+            castAdapter.setCasts(tvShowEntity.casts)
+            with(rvCast) {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                setHasFixedSize(true)
+                adapter = castAdapter
+            }
+
+            lastEpisodeToAir.visibility = View.VISIBLE
+            cvLastEpisode.visibility = View.VISIBLE
+            tvNameSeason.text = tvShowEntity.lastEpisodeToAir?.name
+            tvDateSeason.text = tvShowEntity.lastEpisodeToAir?.air_date
+            tvTotalSeason.text =
+                getString(R.string.text_episodes, tvShowEntity.lastEpisodeToAir?.episodeNumber)
+            tvOverviewSeason.text = tvShowEntity.lastEpisodeToAir?.overview
+            setImageDefaultBackdrop(
+                this@DetailFilmActivity,
+                tvShowEntity.lastEpisodeToAir?.stillPath,
+                imgPosterSeason
+            )
         }
-
-        detailContentBinding.lastEpisodeToAir.visibility = View.VISIBLE
-        detailContentBinding.cvLastEpisode.visibility = View.VISIBLE
-        detailContentBinding.tvNameSeason.text = tvShowEntity.lastEpisodeToAir?.name
-        detailContentBinding.tvDateSeason.text = tvShowEntity.lastEpisodeToAir?.air_date
-        detailContentBinding.tvTotalSeason.text =
-            getString(R.string.text_episodes, tvShowEntity.lastEpisodeToAir?.episodeNumber)
-        detailContentBinding.tvOverviewSeason.text = tvShowEntity.lastEpisodeToAir?.overview
-        setImageDefaultBackdrop(
-            this,
-            tvShowEntity.lastEpisodeToAir?.stillPath,
-            detailContentBinding.imgPosterSeason
-        )
     }
 }
