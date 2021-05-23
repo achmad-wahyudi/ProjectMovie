@@ -3,10 +3,11 @@ package com.dicodingapp.moviecatalogue.ui.movie.detail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.dicodingapp.moviecatalogue.data.MovieEntity
-import com.dicodingapp.moviecatalogue.data.source.FilmRepository
+import com.dicodingapp.moviecatalogue.data.FilmRepository
+import com.dicodingapp.moviecatalogue.data.source.local.entity.MovieWithGenreAndCast
 import com.dicodingapp.moviecatalogue.ui.detail.DetailFilmViewModel
 import com.dicodingapp.moviecatalogue.utils.DataDummy
+import com.dicodingapp.moviecatalogue.vo.Resource
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
 import org.junit.Before
@@ -22,6 +23,7 @@ class DetailMovieViewModelTest {
     private lateinit var viewModel: DetailFilmViewModel
     private val dummyMovie = DataDummy.generateDummyMovie()[0]
     private val movieId = dummyMovie.movieId
+    private val dummyMovieDetail = DataDummy.generateDummyMovieWithGenreAndCast(dummyMovie)
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -30,7 +32,7 @@ class DetailMovieViewModelTest {
     private lateinit var filmRepository: FilmRepository
 
     @Mock
-    private lateinit var observer: Observer<MovieEntity>
+    private lateinit var observer: Observer<Resource<MovieWithGenreAndCast>>
 
     @Before
     fun setUp() {
@@ -40,14 +42,14 @@ class DetailMovieViewModelTest {
     @Test
     fun getMovie() {
 
-        val movie = MutableLiveData<MovieEntity>()
-        movie.value = dummyMovie
+        val movie = MutableLiveData<Resource<MovieWithGenreAndCast>>()
+        movie.value = Resource.success(dummyMovieDetail)
 
         Mockito.`when`(filmRepository.getMovieById(Integer.parseInt(movieId))).thenReturn(movie)
-        val movieEntities = viewModel.getMovie(movieId).value
+        val movieEntities = viewModel.getMovie(movieId).value?.data!!.mMovie
         Mockito.verify(filmRepository).getMovieById(Integer.parseInt(movieId))
         assertNotNull(movieEntities)
-        assertEquals(dummyMovie.movieId, movieEntities!!.movieId)
+        assertEquals(dummyMovie.movieId, movieEntities.movieId)
         assertEquals(dummyMovie.title, movieEntities.title)
         assertEquals(dummyMovie.releaseDate, movieEntities.releaseDate)
         assertEquals(dummyMovie.status, movieEntities.status)
@@ -59,11 +61,11 @@ class DetailMovieViewModelTest {
         assertEquals(dummyMovie.budget, movieEntities.budget)
         assertEquals(dummyMovie.revenue, movieEntities.revenue)
 
-        val genresEntities = movieEntities.genres
+        val genresEntities = viewModel.getMovie(movieId).value?.data!!.mGenres
         assertNotNull(genresEntities)
         assertEquals(4, genresEntities.size.toLong())
 
         viewModel.getMovie(movieId).observeForever(observer)
-        Mockito.verify(observer).onChanged(dummyMovie)
+        Mockito.verify(observer).onChanged(Resource.success(dummyMovieDetail))
     }
 }

@@ -4,49 +4,61 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicodingapp.moviecatalogue.data.source.remote.network.ApiConfig
 import com.dicodingapp.moviecatalogue.databinding.FragmentMovieBinding
 import com.dicodingapp.moviecatalogue.viewmodel.ViewModelFactory
+import com.dicodingapp.moviecatalogue.vo.Status
 
 class MovieFragment : Fragment() {
 
-    private lateinit var fragmentMovieBinding: FragmentMovieBinding
+    private var _fragmentMovieBinding: FragmentMovieBinding? = null
+    private val binding get() = _fragmentMovieBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        fragmentMovieBinding = FragmentMovieBinding.inflate(layoutInflater, container, false)
-        return fragmentMovieBinding.root
+    ): ConstraintLayout? {
+        _fragmentMovieBinding = FragmentMovieBinding.inflate(layoutInflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(ApiConfig.provideApiService())
+            val factory = ViewModelFactory.getInstance(requireActivity(), ApiConfig.provideApiService())
             val viewModel = ViewModelProvider(
                 this,
                 factory
             )[MovieViewModel::class.java]
 
             val movieAdapter = MovieAdapter()
-
-            fragmentMovieBinding.progressBar.visibility = View.VISIBLE
-            fragmentMovieBinding.rvMovie.visibility = View.GONE
-            viewModel.getMovies().observe(viewLifecycleOwner, { movies ->
-                fragmentMovieBinding.progressBar.visibility = View.GONE
-                fragmentMovieBinding.rvMovie.visibility = View.VISIBLE
-                movieAdapter.setMovies(movies)
-                movieAdapter.notifyDataSetChanged()
+            viewModel.getMovies().observe(requireActivity(), { movies ->
+                if (movies != null) {
+                    when (movies.status) {
+                        Status.LOADING -> binding?.progressBar?.visibility = View.VISIBLE
+                        Status.SUCCESS -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            movieAdapter.setMovies(movies.data)
+                            movieAdapter.notifyDataSetChanged()
+                        }
+                        Status.ERROR -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            Toast.makeText(context, movies.message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             })
-            with(fragmentMovieBinding.rvMovie) {
-                layoutManager = GridLayoutManager(context, 2)
-                setHasFixedSize(true)
-                adapter = movieAdapter
+
+            with(binding?.rvMovie) {
+                this?.layoutManager = GridLayoutManager(context, 2)
+                this?.setHasFixedSize(true)
+                this?.adapter = movieAdapter
             }
         }
     }

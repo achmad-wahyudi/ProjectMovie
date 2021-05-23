@@ -1,9 +1,10 @@
 package com.dicodingapp.moviecatalogue.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicodingapp.moviecatalogue.Injection
-import com.dicodingapp.moviecatalogue.data.source.FilmRepository
+import com.dicodingapp.moviecatalogue.data.FilmRepository
 import com.dicodingapp.moviecatalogue.data.source.remote.network.ApiService
 import com.dicodingapp.moviecatalogue.ui.detail.DetailFilmViewModel
 import com.dicodingapp.moviecatalogue.ui.movie.MovieViewModel
@@ -16,9 +17,9 @@ class ViewModelFactory private constructor(private val mFilmRepository: FilmRepo
         @Volatile
         private var instance: ViewModelFactory? = null
 
-        fun getInstance(apiService: ApiService): ViewModelFactory =
+        fun getInstance(context: Context, apiService: ApiService): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideRepository(apiService)).apply {
+                instance ?: ViewModelFactory(Injection.provideRepository(context, apiService)).apply {
                     instance = this
                 }
             }

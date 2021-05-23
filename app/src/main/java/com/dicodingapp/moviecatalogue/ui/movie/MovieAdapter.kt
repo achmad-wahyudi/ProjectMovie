@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dicodingapp.moviecatalogue.data.MovieEntity
+import com.dicodingapp.moviecatalogue.data.source.local.entity.MovieEntity
 import com.dicodingapp.moviecatalogue.databinding.ItemsMovieBinding
 import com.dicodingapp.moviecatalogue.ui.detail.DetailFilmActivity
 import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefaultPoster

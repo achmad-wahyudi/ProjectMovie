@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dicodingapp.moviecatalogue.data.TvShowEntity
+import com.dicodingapp.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.dicodingapp.moviecatalogue.databinding.ItemsTvShowBinding
 import com.dicodingapp.moviecatalogue.ui.detail.DetailFilmActivity
 import com.dicodingapp.moviecatalogue.utils.ImageViewHelper

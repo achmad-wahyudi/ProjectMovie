@@ -12,12 +12,27 @@ import com.dicodingapp.moviecatalogue.data.source.remote.network.response.TvShow
 import com.dicodingapp.moviecatalogue.utils.AppExecutors
 import com.dicodingapp.moviecatalogue.vo.Resource
 
-class FakeFilmRepository(
+class FilmRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) :
     FilmDataSource {
+
+    companion object {
+        @Volatile
+        private var instance: FilmRepository? = null
+        fun getInstance(
+            remoteData: RemoteDataSource,
+            localData: LocalDataSource,
+            appExecutors: AppExecutors
+        ): FilmRepository =
+            instance ?: synchronized(this) {
+                instance ?: FilmRepository(remoteData, localData, appExecutors).apply {
+                    instance = this
+                }
+            }
+    }
 
     override fun getAllMovie(): LiveData<Resource<List<MovieEntity>>> {
         return object :

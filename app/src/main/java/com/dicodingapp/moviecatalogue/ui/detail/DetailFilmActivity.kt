@@ -3,12 +3,13 @@ package com.dicodingapp.moviecatalogue.ui.detail
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicodingapp.moviecatalogue.R
-import com.dicodingapp.moviecatalogue.data.MovieEntity
-import com.dicodingapp.moviecatalogue.data.TvShowEntity
+import com.dicodingapp.moviecatalogue.data.source.local.entity.MovieWithGenreAndCast
+import com.dicodingapp.moviecatalogue.data.source.local.entity.TvShowWithGenreAndCastAndLastEpisode
 import com.dicodingapp.moviecatalogue.data.source.remote.network.ApiConfig
 import com.dicodingapp.moviecatalogue.databinding.ActivityDetailFilmBinding
 import com.dicodingapp.moviecatalogue.databinding.ContentDetailFilmBinding
@@ -17,6 +18,7 @@ import com.dicodingapp.moviecatalogue.utils.Converting.formatDollar
 import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefaultBackdrop
 import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefaultPoster
 import com.dicodingapp.moviecatalogue.viewmodel.ViewModelFactory
+import com.dicodingapp.moviecatalogue.vo.Status
 
 class DetailFilmActivity : AppCompatActivity() {
 
@@ -25,12 +27,13 @@ class DetailFilmActivity : AppCompatActivity() {
         const val EXTRA_TV_SHOW = "extra_tv_show"
     }
 
-    private lateinit var detailContentBinding: ContentDetailFilmBinding
+    private var _detailContentBinding: ContentDetailFilmBinding? = null
+    private val binding get() = _detailContentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val activityDetailBinding = ActivityDetailFilmBinding.inflate(layoutInflater)
-        detailContentBinding = activityDetailBinding.detailContent
+        _detailContentBinding = activityDetailBinding.detailContent
 
         setContentView(activityDetailBinding.root)
 
@@ -38,7 +41,7 @@ class DetailFilmActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        val factory = ViewModelFactory.getInstance(ApiConfig.provideApiService())
+        val factory = ViewModelFactory.getInstance(this, ApiConfig.provideApiService())
         val viewModel = ViewModelProvider(
             this,
             factory
@@ -50,32 +53,61 @@ class DetailFilmActivity : AppCompatActivity() {
             if (movieId != null) {
                 activityDetailBinding.tvDetail.text = getString(R.string.text_detail_movie)
 
-                activityDetailBinding.progressBar.visibility = View.VISIBLE
-                activityDetailBinding.content.visibility = View.GONE
                 viewModel.getMovie(movieId).observe(this, { movies ->
-                    activityDetailBinding.progressBar.visibility = View.GONE
-                    activityDetailBinding.content.visibility = View.VISIBLE
-                    populateMovie(movies)
+                    if (movies != null) {
+                        when (movies.status) {
+                            Status.LOADING -> {
+                                activityDetailBinding.progressBar.visibility = View.VISIBLE
+                                activityDetailBinding.content.visibility = View.GONE
+                            }
+                            Status.SUCCESS -> {
+                                activityDetailBinding.progressBar.visibility = View.GONE
+                                activityDetailBinding.content.visibility = View.VISIBLE
+                                populateMovie(movies.data!!)
+                            }
+                            Status.ERROR -> {
+                                activityDetailBinding.progressBar.visibility = View.GONE
+                                activityDetailBinding.content.visibility = View.VISIBLE
+                                Toast.makeText(this, movies.message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 })
             }
             val tvShowId = extras.getString(EXTRA_TV_SHOW)
             if (tvShowId != null) {
                 activityDetailBinding.tvDetail.text = getString(R.string.text_detail_tv_show)
 
-                activityDetailBinding.progressBar.visibility = View.VISIBLE
-                activityDetailBinding.content.visibility = View.GONE
                 viewModel.getTvShow(tvShowId).observe(this, { tvShow ->
-                    activityDetailBinding.progressBar.visibility = View.GONE
-                    activityDetailBinding.content.visibility = View.VISIBLE
-                    populateTvShow(tvShow)
+                    if (tvShow != null) {
+                        when (tvShow.status) {
+                            Status.LOADING -> {
+                                activityDetailBinding.progressBar.visibility = View.VISIBLE
+                                activityDetailBinding.content.visibility = View.GONE
+                            }
+                            Status.SUCCESS -> {
+                                activityDetailBinding.progressBar.visibility = View.GONE
+                                activityDetailBinding.content.visibility = View.VISIBLE
+                                populateTvShow(tvShow.data!!)
+                            }
+                            Status.ERROR -> {
+                                activityDetailBinding.progressBar.visibility = View.GONE
+                                activityDetailBinding.content.visibility = View.VISIBLE
+                                Toast.makeText(this, tvShow.message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 })
             }
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun populateMovie(movieEntity: MovieEntity) {
-        detailContentBinding.apply {
+    private fun populateMovie(movieWithGenreAndCast: MovieWithGenreAndCast) {
+        binding?.apply {
+            val movieEntity = movieWithGenreAndCast.mMovie
+            val genres = movieWithGenreAndCast.mGenres
+            val casts = movieWithGenreAndCast.mCast
             tvTitle.text = movieEntity.title
             tvTagLine.text = movieEntity.tagLine
             tvDate.text = movieEntity.releaseDate
@@ -92,7 +124,7 @@ class DetailFilmActivity : AppCompatActivity() {
             val vote = (movieEntity.voteAverage * 10).toInt()
             tvVote.text = "${vote}%"
 
-            tvGenre.text = movieEntity.genres.joinToString { it.genreName }
+            tvGenre.text = genres.joinToString { it.genreName }
 
             setImageDefaultPoster(
                 this@DetailFilmActivity,
@@ -107,7 +139,7 @@ class DetailFilmActivity : AppCompatActivity() {
             )
 
             val castAdapter = CastAdapter()
-            castAdapter.setCasts(movieEntity.casts)
+            castAdapter.setCasts(casts)
             with(rvCast) {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 setHasFixedSize(true)
@@ -120,8 +152,12 @@ class DetailFilmActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun populateTvShow(tvShowEntity: TvShowEntity) {
-        detailContentBinding.apply {
+    private fun populateTvShow(tvShowWithGenreAndCastAndLastEpisode: TvShowWithGenreAndCastAndLastEpisode) {
+        binding?.apply {
+            val tvShowEntity = tvShowWithGenreAndCastAndLastEpisode.mTvShow
+            val genres = tvShowWithGenreAndCastAndLastEpisode.mGenresTvShow
+            val casts = tvShowWithGenreAndCastAndLastEpisode.mCastTvShow
+            val mLastEpisodeToAir = tvShowWithGenreAndCastAndLastEpisode.mLastEpisode
             tvTitle.text = tvShowEntity.name
             tvTagLine.text = tvShowEntity.tagLine
             tvDate.text = tvShowEntity.firstAirDate
@@ -140,7 +176,7 @@ class DetailFilmActivity : AppCompatActivity() {
             val vote = (tvShowEntity.voteAverage * 10).toInt()
             tvVote.text = "${vote}%"
 
-            tvGenre.text = tvShowEntity.genres.joinToString { it.genreName }
+            tvGenre.text = genres.joinToString { it.genreName }
 
             setImageDefaultPoster(
                 this@DetailFilmActivity,
@@ -154,8 +190,8 @@ class DetailFilmActivity : AppCompatActivity() {
                 imgBackdrop
             )
 
-            val castAdapter = CastAdapter()
-            castAdapter.setCasts(tvShowEntity.casts)
+            val castAdapter = CastTvShowAdapter()
+            castAdapter.setCasts(casts)
             with(rvCast) {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 setHasFixedSize(true)
@@ -164,14 +200,14 @@ class DetailFilmActivity : AppCompatActivity() {
 
             lastEpisodeToAir.visibility = View.VISIBLE
             cvLastEpisode.visibility = View.VISIBLE
-            tvNameSeason.text = tvShowEntity.lastEpisodeToAir?.name
-            tvDateSeason.text = tvShowEntity.lastEpisodeToAir?.air_date
+            tvNameSeason.text = mLastEpisodeToAir.name
+            tvDateSeason.text = mLastEpisodeToAir.air_date
             tvTotalSeason.text =
-                getString(R.string.text_episodes, tvShowEntity.lastEpisodeToAir?.episodeNumber)
-            tvOverviewSeason.text = tvShowEntity.lastEpisodeToAir?.overview
+                getString(R.string.text_episodes, mLastEpisodeToAir.episodeNumber)
+            tvOverviewSeason.text = mLastEpisodeToAir.overview
             setImageDefaultBackdrop(
                 this@DetailFilmActivity,
-                tvShowEntity.lastEpisodeToAir?.stillPath,
+                mLastEpisodeToAir.stillPath,
                 imgPosterSeason
             )
         }

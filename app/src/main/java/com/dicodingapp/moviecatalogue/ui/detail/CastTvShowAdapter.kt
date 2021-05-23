@@ -4,14 +4,14 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dicodingapp.moviecatalogue.data.source.local.entity.CastEntity
+import com.dicodingapp.moviecatalogue.data.source.local.entity.CastTvShowEntity
 import com.dicodingapp.moviecatalogue.databinding.ItemsCastBinding
 import com.dicodingapp.moviecatalogue.utils.ImageViewHelper.setImageDefaultBackdrop
 
-class CastAdapter : RecyclerView.Adapter<CastAdapter.CastViewHolder>() {
-    private var listCasts = ArrayList<CastEntity>()
+class CastTvShowAdapter : RecyclerView.Adapter<CastTvShowAdapter.CastViewHolder>() {
+    private var listCasts = ArrayList<CastTvShowEntity>()
 
-    fun setCasts(cast: List<CastEntity>?) {
+    fun setCasts(cast: List<CastTvShowEntity>?) {
         if (cast == null) return
         this.listCasts.clear()
         this.listCasts.addAll(cast)
@@ -33,7 +33,7 @@ class CastAdapter : RecyclerView.Adapter<CastAdapter.CastViewHolder>() {
     class CastViewHolder(private val binding: ItemsCastBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(cast: CastEntity) {
+        fun bind(cast: CastTvShowEntity) {
             with(binding) {
                 tvItemName.text = cast.name
                 tvItemName2.text = cast.character

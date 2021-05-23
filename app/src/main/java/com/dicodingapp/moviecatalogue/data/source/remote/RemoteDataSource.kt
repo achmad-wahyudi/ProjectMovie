@@ -2,6 +2,9 @@ package com.dicodingapp.moviecatalogue.data.source.remote
 
 import android.os.Handler
 import android.os.Looper
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.dicodingapp.moviecatalogue.data.source.remote.network.ApiResponse
 import com.dicodingapp.moviecatalogue.data.source.remote.network.ApiService
 import com.dicodingapp.moviecatalogue.data.source.remote.network.response.*
 import com.dicodingapp.moviecatalogue.utils.EspressoIdlingResource
@@ -25,14 +28,15 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
             }
     }
 
-    fun getAllMovie(callback: LoadMoviesCallback) {
+    fun getAllMovie(): LiveData<ApiResponse<List<ResultsItem>>> {
         EspressoIdlingResource.increment()
+        val resultMovie = MutableLiveData<ApiResponse<List<ResultsItem>>>()
         handler.postDelayed(
             {
                 apiService.getPopularMovies(page = 1).enqueue(
                     object : Callback<MoviesResponse> {
                         override fun onFailure(call: Call<MoviesResponse>?, t: Throwable) {
-                            callback.onAllMovieReceived(emptyList())
+                            resultMovie.value = ApiResponse.error(t.message.toString(), emptyList())
                         }
 
                         override fun onResponse(
@@ -41,9 +45,9 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
                         ) {
                             if (response.isSuccessful) {
                                 val data = response.body()?.results ?: emptyList()
-                                callback.onAllMovieReceived(data)
+                                resultMovie.value = ApiResponse.success(data)
                             } else {
-                                callback.onAllMovieReceived(emptyList())
+                                resultMovie.value = ApiResponse.success(emptyList())
                             }
                         }
                     }
@@ -53,10 +57,12 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
             },
             SERVICE_LATENCY_IN_MILLIS
         )
+        return resultMovie
     }
 
-    fun getMovieById(movieId: Int, callback: LoadMovieByIdCallback) {
+    fun getMovieById(movieId: Int): LiveData<ApiResponse<MovieDetailResponse>> {
         EspressoIdlingResource.increment()
+        val resultMovie = MutableLiveData<ApiResponse<MovieDetailResponse>>()
         handler.postDelayed(
             {
                 apiService.getMovieById(id = movieId.toString()).enqueue(
@@ -70,7 +76,7 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
                         ) {
                             if (response.isSuccessful) {
                                 val data = response.body() ?: emptyArray<MovieDetailResponse>()
-                                callback.onMovieByIdReceived(data as MovieDetailResponse)
+                                resultMovie.value = ApiResponse.success(data as MovieDetailResponse)
                             }
                         }
                     }
@@ -80,16 +86,19 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
             },
             SERVICE_LATENCY_IN_MILLIS
         )
+        return resultMovie
     }
 
-    fun getAllTvShow(callback: LoadTvShowsCallback) {
+    fun getAllTvShow(): LiveData<ApiResponse<List<ResultsItemTvShow>>> {
         EspressoIdlingResource.increment()
+        val resultTvShow = MutableLiveData<ApiResponse<List<ResultsItemTvShow>>>()
         handler.postDelayed(
             {
                 apiService.getPopularTvShow(page = 1).enqueue(
                     object : Callback<TvShowsResponse> {
                         override fun onFailure(call: Call<TvShowsResponse>?, t: Throwable) {
-                            callback.onAllTvShowReceived(emptyList())
+                            resultTvShow.value =
+                                ApiResponse.error(t.message.toString(), emptyList())
                         }
 
                         override fun onResponse(
@@ -98,9 +107,9 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
                         ) {
                             if (response.isSuccessful) {
                                 val data = response.body()?.results ?: emptyList()
-                                callback.onAllTvShowReceived(data)
+                                resultTvShow.value = ApiResponse.success(data)
                             } else {
-                                callback.onAllTvShowReceived(emptyList())
+                                resultTvShow.value = ApiResponse.success(emptyList())
                             }
                         }
                     }
@@ -110,13 +119,15 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
             },
             SERVICE_LATENCY_IN_MILLIS
         )
+        return resultTvShow
     }
 
-    fun getTvShowById(movieId: Int, callback: LoadTvShowByIdCallback) {
+    fun getTvShowById(tvShowId: Int): LiveData<ApiResponse<TvShowDetailResponse>> {
         EspressoIdlingResource.increment()
+        val resultTvShow = MutableLiveData<ApiResponse<TvShowDetailResponse>>()
         handler.postDelayed(
             {
-                apiService.getTvShowById(id = movieId.toString()).enqueue(
+                apiService.getTvShowById(id = tvShowId.toString()).enqueue(
                     object : Callback<TvShowDetailResponse> {
                         override fun onFailure(call: Call<TvShowDetailResponse>?, t: Throwable) {
                         }
@@ -127,7 +138,8 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
                         ) {
                             if (response.isSuccessful) {
                                 val data = response.body() ?: emptyArray<TvShowDetailResponse>()
-                                callback.onTvShowByIdReceived(data as TvShowDetailResponse)
+                                resultTvShow.value =
+                                    ApiResponse.success(data as TvShowDetailResponse)
                             }
                         }
                     }
@@ -137,21 +149,6 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
             },
             SERVICE_LATENCY_IN_MILLIS
         )
-    }
-
-    interface LoadMoviesCallback {
-        fun onAllMovieReceived(itemMovieResponse: List<ResultsItem?>)
-    }
-
-    interface LoadMovieByIdCallback {
-        fun onMovieByIdReceived(movieDetailResponse: MovieDetailResponse)
-    }
-
-    interface LoadTvShowsCallback {
-        fun onAllTvShowReceived(itemTvShowResponse: List<ResultsItemTvShow?>)
-    }
-
-    interface LoadTvShowByIdCallback {
-        fun onTvShowByIdReceived(tvShowDetailResponse: TvShowDetailResponse)
+        return resultTvShow
     }
 }

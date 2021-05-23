@@ -4,30 +4,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicodingapp.moviecatalogue.data.source.remote.network.ApiConfig
 import com.dicodingapp.moviecatalogue.databinding.FragmentTvShowBinding
 import com.dicodingapp.moviecatalogue.viewmodel.ViewModelFactory
+import com.dicodingapp.moviecatalogue.vo.Status
 
 class TvShowFragment : Fragment() {
 
-    private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
+    private var fragmentTvShowBinding: FragmentTvShowBinding? = null
+    private val binding get() = fragmentTvShowBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): ConstraintLayout? {
         fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
-        return fragmentTvShowBinding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(ApiConfig.provideApiService())
+            val factory =
+                ViewModelFactory.getInstance(requireActivity(), ApiConfig.provideApiService())
             val viewModel = ViewModelProvider(
                 this,
                 factory
@@ -35,18 +40,27 @@ class TvShowFragment : Fragment() {
 
             val tvShowAdapter = TvShowAdapter()
 
-            fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
-            fragmentTvShowBinding.rvTvShow.visibility = View.GONE
-            viewModel.getTvShow().observe(viewLifecycleOwner, { tvShows ->
-                fragmentTvShowBinding.progressBar.visibility = View.GONE
-                fragmentTvShowBinding.rvTvShow.visibility = View.VISIBLE
-                tvShowAdapter.setTvShows(tvShows)
-                tvShowAdapter.notifyDataSetChanged()
+            viewModel.getTvShow().observe(requireActivity(), { tvShows ->
+                if (tvShows != null) {
+                    when (tvShows.status) {
+                        Status.LOADING -> binding?.progressBar?.visibility = View.VISIBLE
+                        Status.SUCCESS -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            tvShowAdapter.setTvShows(tvShows.data)
+                            tvShowAdapter.notifyDataSetChanged()
+                        }
+                        Status.ERROR -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            Toast.makeText(context, tvShows.message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             })
-            with(fragmentTvShowBinding.rvTvShow) {
-                layoutManager = GridLayoutManager(context, 2)
-                setHasFixedSize(true)
-                adapter = tvShowAdapter
+
+            with(binding?.rvTvShow) {
+                this?.layoutManager = GridLayoutManager(context, 2)
+                this?.setHasFixedSize(true)
+                this?.adapter = tvShowAdapter
             }
         }
     }
