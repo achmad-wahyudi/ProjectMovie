@@ -18,7 +18,9 @@ import org.junit.Test
 
 class HomeActivityTest {
     private val dummyMovie = DataDummy.generateDummyMovie()
+    private val dummyMovieGenres = DataDummy.generateDummyGenres()
     private val dummyTvShow = DataDummy.generateDummyTvShow()
+    private val dummyTvShowGenres = DataDummy.generateDummyGenresTvShow()
 
     @Before
     fun setUp() {
@@ -48,7 +50,7 @@ class HomeActivityTest {
         onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movie)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                0,
+                1,
                 click()
             )
         )
@@ -82,7 +84,7 @@ class HomeActivityTest {
             )
         )
 
-        val genres = dummyMovie[0].genres.joinToString { it.genreName }
+        val genres = dummyMovieGenres.joinToString { it.genreName }
         onView(withId(R.id.tv_genre)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_genre)).check(matches(withText(genres)))
     }
@@ -104,7 +106,7 @@ class HomeActivityTest {
         onView(withId(R.id.rv_tv_show)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_tv_show)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                0,
+                2,
                 click()
             )
         )
@@ -138,7 +140,7 @@ class HomeActivityTest {
             )
         )
 
-        val genres = dummyTvShow[0].genres.joinToString { it.genreName }
+        val genres = dummyTvShowGenres.joinToString { it.genreName }
         onView(withId(R.id.tv_genre)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_genre)).check(matches(withText(genres)))
     }

@@ -46,6 +46,7 @@ class FakeFilmRepository(
                         response.backdropPath!!,
                         0,
                         0,
+                        response.popularity!!
                     )
                     movieList.add(movie)
                 }
@@ -88,6 +89,7 @@ class FakeFilmRepository(
                     data.backdropPath!!,
                     data.budget!!,
                     data.revenue!!,
+                    data.popularity!!,
                 )
                 localDataSource.insertMovie(movie)
                 localDataSource.insertGenres(genreList)
@@ -124,6 +126,7 @@ class FakeFilmRepository(
                         "",
                         "",
                         response.voteAverage!!,
+                        response.popularity!!,
                     )
                     tvShowList.add(tvShow)
                 }
@@ -180,6 +183,7 @@ class FakeFilmRepository(
                     data.tagline!!,
                     data.type!!,
                     data.voteAverage!!,
+                    data.popularity!!,
                 )
                 localDataSource.insertTvShow(tvShow)
                 localDataSource.insertGenresTvShow(genreList)

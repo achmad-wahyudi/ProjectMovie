@@ -60,6 +60,10 @@ data class TvShowEntity(
     @ColumnInfo(name = "voteAverage")
     var voteAverage: Double,
 
+    @NonNull
+    @ColumnInfo(name = "popularity")
+    var popularity: Double,
+
     @ColumnInfo(name = "bookmarked")
     var bookmarked: Boolean = false,
 )

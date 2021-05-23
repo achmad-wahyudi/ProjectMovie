@@ -7,14 +7,14 @@ import com.dicodingapp.moviecatalogue.data.source.local.entity.*
 @Dao
 interface FilmDao {
 
-    @Query("SELECT * FROM moviesentities")
+    @Query("SELECT * FROM moviesentities ORDER BY popularity DESC")
     fun getAllMovie(): LiveData<List<MovieEntity>>
 
     @Transaction
     @Query("SELECT * FROM moviesentities WHERE movieId = :movieId")
     fun getMovieById(movieId: String): LiveData<MovieWithGenreAndCast>
 
-    @Query("SELECT * FROM tvshowsentities")
+    @Query("SELECT * FROM tvshowsentities ORDER BY popularity DESC")
     fun getAllTvShow(): LiveData<List<TvShowEntity>>
 
     @Transaction

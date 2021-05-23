@@ -50,7 +50,10 @@ data class TvShowDetailResponse(
     val lastAirDate: String? = null,
 
     @field:SerializedName("status")
-    val status: String? = null
+    val status: String? = null,
+
+    @field:SerializedName("popularity")
+    val popularity: Double? = null
 )
 
 data class LastEpisodeToAir(

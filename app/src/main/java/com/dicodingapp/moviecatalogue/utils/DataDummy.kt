@@ -38,7 +38,8 @@ object DataDummy {
                 "An elite Navy SEAL uncovers an international conspiracy while seeking justice for the murder of his pregnant wife.",
                 "/fPGeS6jgdLovQAKunNHX8l0avCy.jpg",
                 0,
-                0
+                0,
+                2358.971
             )
         )
 
@@ -63,7 +64,8 @@ object DataDummy {
                 "Ended",
                 "Honor the shield.",
                 "Miniseries",
-                7.9
+                7.9,
+                0.0,
             )
         )
 

@@ -61,6 +61,7 @@ class FilmRepository private constructor(
                         response.backdropPath!!,
                         0,
                         0,
+                        response.popularity!!
                     )
                     movieList.add(movie)
                 }
@@ -103,6 +104,7 @@ class FilmRepository private constructor(
                     data.backdropPath!!,
                     data.budget!!,
                     data.revenue!!,
+                    data.popularity!!,
                 )
                 localDataSource.insertMovie(movie)
                 localDataSource.insertGenres(genreList)
@@ -139,6 +141,7 @@ class FilmRepository private constructor(
                         "",
                         "",
                         response.voteAverage!!,
+                        response.popularity!!,
                     )
                     tvShowList.add(tvShow)
                 }
@@ -195,6 +198,7 @@ class FilmRepository private constructor(
                     data.tagline!!,
                     data.type!!,
                     data.voteAverage!!,
+                    data.popularity!!,
                 )
                 localDataSource.insertTvShow(tvShow)
                 localDataSource.insertGenresTvShow(genreList)

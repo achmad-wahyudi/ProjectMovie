@@ -42,6 +42,9 @@ data class MovieEntity(
     @ColumnInfo(name = "revenue")
     var revenue: Int,
 
+    @ColumnInfo(name = "popularity")
+    var popularity: Double,
+
     @ColumnInfo(name = "bookmarked")
     var bookmarked: Boolean = false,
 )
