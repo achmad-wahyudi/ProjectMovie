@@ -49,10 +49,10 @@ class BookmarkActivity : AppCompatActivity() {
                         }
                     })
 
-                    binding?.rvMovie?.layoutManager = GridLayoutManager(this, 2)
-                    binding?.rvMovie?.setHasFixedSize(true)
-                    binding?.rvMovie?.isNestedScrollingEnabled = false
-                    binding?.rvMovie?.adapter = movieAdapter
+                    binding?.rvBookmark?.layoutManager = GridLayoutManager(this, 2)
+                    binding?.rvBookmark?.setHasFixedSize(true)
+                    binding?.rvBookmark?.isNestedScrollingEnabled = false
+                    binding?.rvBookmark?.adapter = movieAdapter
                 } else {
                     val movieAdapter = BookmarkTvShowAdapter()
                     binding?.progressBar?.visibility = View.VISIBLE
@@ -64,10 +64,10 @@ class BookmarkActivity : AppCompatActivity() {
                         }
                     })
 
-                    binding?.rvMovie?.layoutManager = GridLayoutManager(this, 2)
-                    binding?.rvMovie?.setHasFixedSize(true)
-                    binding?.rvMovie?.isNestedScrollingEnabled = false
-                    binding?.rvMovie?.adapter = movieAdapter
+                    binding?.rvBookmark?.layoutManager = GridLayoutManager(this, 2)
+                    binding?.rvBookmark?.setHasFixedSize(true)
+                    binding?.rvBookmark?.isNestedScrollingEnabled = false
+                    binding?.rvBookmark?.adapter = movieAdapter
                 }
             }
         }

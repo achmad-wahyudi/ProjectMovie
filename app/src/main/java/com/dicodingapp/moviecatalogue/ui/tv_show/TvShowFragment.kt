@@ -65,7 +65,7 @@ class TvShowFragment : Fragment() {
                 this?.adapter = tvShowAdapter
             }
 
-            binding?.btn?.setOnClickListener {
+            binding?.btnBookmarkTvShow?.setOnClickListener {
                 val intent = Intent(context, BookmarkActivity::class.java)
                 intent.putExtra(BookmarkActivity.EXTRA_BOOKMARK, "2")
                 startActivity(intent)

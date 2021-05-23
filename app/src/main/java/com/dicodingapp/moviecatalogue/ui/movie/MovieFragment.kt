@@ -64,7 +64,7 @@ class MovieFragment : Fragment() {
                 this?.adapter = movieAdapter
             }
 
-            binding?.btn?.setOnClickListener {
+            binding?.btnBookmarkMovie?.setOnClickListener {
                 val intent = Intent(context, BookmarkActivity::class.java)
                 intent.putExtra(BookmarkActivity.EXTRA_BOOKMARK, "1")
                 startActivity(intent)
