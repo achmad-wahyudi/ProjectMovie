@@ -256,4 +256,9 @@ class DetailFilmActivity : AppCompatActivity() {
             )
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _detailContentBinding = null
+    }
 }

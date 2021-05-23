@@ -1,6 +1,7 @@
 package com.dicodingapp.moviecatalogue.data.source.local
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.dicodingapp.moviecatalogue.data.source.local.entity.*
 import com.dicodingapp.moviecatalogue.data.source.local.room.FilmDao
 
@@ -13,12 +14,12 @@ class LocalDataSource private constructor(private val mFilmDao: FilmDao) {
             INSTANCE ?: LocalDataSource(filmDao)
     }
 
-    fun getAllMovie(): LiveData<List<MovieEntity>> = mFilmDao.getAllMovie()
+    fun getAllMovie(): DataSource.Factory<Int, MovieEntity> = mFilmDao.getAllMovie()
 
     fun getMovieById(movieId: String): LiveData<MovieWithGenreAndCast> =
         mFilmDao.getMovieById(movieId)
 
-    fun getAllTvShow(): LiveData<List<TvShowEntity>> = mFilmDao.getAllTvShow()
+    fun getAllTvShow(): DataSource.Factory<Int, TvShowEntity> = mFilmDao.getAllTvShow()
 
     fun getTvShowById(tvShowId: String): LiveData<TvShowWithGenreAndCastAndLastEpisode> =
         mFilmDao.getTvShowById(tvShowId)
@@ -42,14 +43,16 @@ class LocalDataSource private constructor(private val mFilmDao: FilmDao) {
     fun insertLastEpisodeToAir(lastEpisodeToAir: TvShowLastEpisodeEntity) =
         mFilmDao.insertLastEpisodeToAir(lastEpisodeToAir)
 
-    fun getAllBookmarkedMovie(): LiveData<List<MovieEntity>> = mFilmDao.getBookmarkedMovie()
+    fun getAllBookmarkedMovie(): DataSource.Factory<Int, MovieEntity> =
+        mFilmDao.getBookmarkedMovie()
 
     fun setMovieBookmark(movie: MovieEntity, newState: Boolean) {
         movie.bookmarked = newState
         mFilmDao.updateMovie(movie)
     }
 
-    fun getAllBookmarkedTvShow(): LiveData<List<TvShowEntity>> = mFilmDao.getBookmarkedTvShow()
+    fun getAllBookmarkedTvShow(): DataSource.Factory<Int, TvShowEntity> =
+        mFilmDao.getBookmarkedTvShow()
 
     fun setTvShowBookmark(tvShow: TvShowEntity, newState: Boolean) {
         tvShow.bookmarked = newState

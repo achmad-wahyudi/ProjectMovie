@@ -48,8 +48,7 @@ class TvShowFragment : Fragment() {
                         Status.LOADING -> binding?.progressBar?.visibility = View.VISIBLE
                         Status.SUCCESS -> {
                             binding?.progressBar?.visibility = View.GONE
-                            tvShowAdapter.setTvShows(tvShows.data)
-                            tvShowAdapter.notifyDataSetChanged()
+                            tvShowAdapter.submitList(tvShows.data)
                         }
                         Status.ERROR -> {
                             binding?.progressBar?.visibility = View.GONE
@@ -71,5 +70,10 @@ class TvShowFragment : Fragment() {
                 startActivity(intent)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fragmentTvShowBinding = null
     }
 }

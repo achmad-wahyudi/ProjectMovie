@@ -62,6 +62,9 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomRuntimeVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
 
+    //paging
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
+
     //testing
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'

@@ -4,19 +4,27 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dicodingapp.moviecatalogue.data.source.local.entity.TvShowEntity
 import com.dicodingapp.moviecatalogue.databinding.ItemsTvShowBinding
 import com.dicodingapp.moviecatalogue.ui.detail.DetailFilmActivity
 import com.dicodingapp.moviecatalogue.utils.ImageViewHelper
 
-class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
-    private var listTvShows = ArrayList<TvShowEntity>()
+class TvShowAdapter :
+    PagedListAdapter<TvShowEntity, TvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK) {
 
-    fun setTvShows(tvShow: List<TvShowEntity>?) {
-        if (tvShow == null) return
-        this.listTvShows.clear()
-        this.listTvShows.addAll(tvShow)
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvShowEntity>() {
+            override fun areItemsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem.tvShowId == newItem.tvShowId
+            }
+
+            override fun areContentsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowViewHolder {
@@ -26,11 +34,11 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
-        val tvShow = listTvShows[position]
-        holder.bind(tvShow)
+        val tvShow = getItem(position)
+        if (tvShow != null) {
+            holder.bind(tvShow)
+        }
     }
-
-    override fun getItemCount(): Int = listTvShows.size
 
     class TvShowViewHolder(private val binding: ItemsTvShowBinding) :
         RecyclerView.ViewHolder(binding.root) {

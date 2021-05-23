@@ -1,6 +1,7 @@
 package com.dicodingapp.moviecatalogue.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.dicodingapp.moviecatalogue.data.source.local.entity.*
 
@@ -8,14 +9,14 @@ import com.dicodingapp.moviecatalogue.data.source.local.entity.*
 interface FilmDao {
 
     @Query("SELECT * FROM moviesentities ORDER BY popularity DESC")
-    fun getAllMovie(): LiveData<List<MovieEntity>>
+    fun getAllMovie(): DataSource.Factory<Int, MovieEntity>
 
     @Transaction
     @Query("SELECT * FROM moviesentities WHERE movieId = :movieId")
     fun getMovieById(movieId: String): LiveData<MovieWithGenreAndCast>
 
     @Query("SELECT * FROM tvshowsentities ORDER BY popularity DESC")
-    fun getAllTvShow(): LiveData<List<TvShowEntity>>
+    fun getAllTvShow(): DataSource.Factory<Int, TvShowEntity>
 
     @Transaction
     @Query("SELECT * FROM tvshowsentities WHERE tvShowId = :tvShowId")
@@ -43,13 +44,13 @@ interface FilmDao {
     fun insertLastEpisodeToAir(lastEpisodeToAir: TvShowLastEpisodeEntity)
 
     @Query("SELECT * FROM moviesentities where bookmarked = 1")
-    fun getBookmarkedMovie(): LiveData<List<MovieEntity>>
+    fun getBookmarkedMovie(): DataSource.Factory<Int, MovieEntity>
 
     @Update
     fun updateMovie(movie: MovieEntity)
 
     @Query("SELECT * FROM tvshowsentities where bookmarked = 1")
-    fun getBookmarkedTvShow(): LiveData<List<TvShowEntity>>
+    fun getBookmarkedTvShow(): DataSource.Factory<Int, TvShowEntity>
 
     @Update
     fun updateTvShow(movie: TvShowEntity)

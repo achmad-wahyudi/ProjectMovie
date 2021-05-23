@@ -44,8 +44,7 @@ class BookmarkActivity : AppCompatActivity() {
                     viewModel.getMovies().observe(this, { movies ->
                         if (movies != null) {
                             binding?.progressBar?.visibility = View.GONE
-                            movieAdapter.setMovies(movies)
-                            movieAdapter.notifyDataSetChanged()
+                            movieAdapter.submitList(movies)
                         }
                     })
 
@@ -59,8 +58,7 @@ class BookmarkActivity : AppCompatActivity() {
                     viewModel.getTvShow().observe(this, { tvShows ->
                         if (tvShows != null) {
                             binding?.progressBar?.visibility = View.GONE
-                            movieAdapter.setTvShows(tvShows)
-                            movieAdapter.notifyDataSetChanged()
+                            movieAdapter.submitList(tvShows)
                         }
                     })
 
@@ -79,5 +77,10 @@ class BookmarkActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _activityBookmarkBinding = null
     }
 }
