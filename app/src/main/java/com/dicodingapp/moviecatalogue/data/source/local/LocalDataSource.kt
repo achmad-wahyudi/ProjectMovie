@@ -41,4 +41,19 @@ class LocalDataSource private constructor(private val mFilmDao: FilmDao) {
 
     fun insertLastEpisodeToAir(lastEpisodeToAir: TvShowLastEpisodeEntity) =
         mFilmDao.insertLastEpisodeToAir(lastEpisodeToAir)
+
+    fun getAllBookmarkedMovie(): LiveData<List<MovieEntity>> = mFilmDao.getBookmarkedMovie()
+
+    fun setMovieBookmark(movie: MovieEntity, newState: Boolean) {
+        movie.bookmarked = newState
+        mFilmDao.updateMovie(movie)
+    }
+
+    fun getAllBookmarkedTvShow(): LiveData<List<TvShowEntity>> = mFilmDao.getBookmarkedTvShow()
+
+    fun setTvShowBookmark(tvShow: TvShowEntity, newState: Boolean) {
+        tvShow.bookmarked = newState
+        mFilmDao.updateTvShow(tvShow)
+    }
+
 }

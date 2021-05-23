@@ -16,6 +16,7 @@
     <string name="text_episodes">%s Episodes</string>
 
     <string name="content_desc_button_back">Button Back</string>
+    <string name="content_desc_button_bookmark">Button Bookmark</string>
     <string name="content_desc_backdrop">Backdrop</string>
     <string name="content_desc_cover_backdrop">Cover Backdrop</string>
     <string name="content_desc_poster">Poster</string>

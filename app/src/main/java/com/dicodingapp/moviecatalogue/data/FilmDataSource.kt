@@ -15,4 +15,12 @@ interface FilmDataSource {
     fun getAllTvShow(): LiveData<Resource<List<TvShowEntity>>>
 
     fun getTvShowById(tvShowId: Int): LiveData<Resource<TvShowWithGenreAndCastAndLastEpisode>>
+
+    fun getAllBookmarkedMovie(): LiveData<List<MovieEntity>>
+
+    fun setMovieBookmark(movie: MovieEntity, state: Boolean)
+
+    fun getAllBookmarkedTvShow(): LiveData<List<TvShowEntity>>
+
+    fun setTvShowBookmark(tvShow: TvShowEntity, state: Boolean)
 }

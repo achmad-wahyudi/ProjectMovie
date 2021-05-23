@@ -37,6 +37,7 @@ class DetailTvShowViewModelTest {
     @Before
     fun setUp() {
         viewModel = DetailFilmViewModel(filmRepository)
+        viewModel.setSelectedTvShow(tvShowId)
     }
 
     @Test
@@ -45,7 +46,9 @@ class DetailTvShowViewModelTest {
         tvShow.value = Resource.success(dummyTvShowDetail)
 
         Mockito.`when`(filmRepository.getTvShowById(Integer.parseInt(tvShowId))).thenReturn(tvShow)
-        val tvShowEntities = viewModel.getTvShow(tvShowId).value?.data!!.mTvShow
+        viewModel.tvShowModule.observeForever(observer)
+
+        val tvShowEntities = viewModel.tvShowModule.value?.data!!.mTvShow
         Mockito.verify(filmRepository).getTvShowById(Integer.parseInt(tvShowId))
         TestCase.assertNotNull(tvShowEntities)
         TestCase.assertEquals(dummyTvShow.tvShowId, tvShowEntities.tvShowId)
@@ -60,11 +63,11 @@ class DetailTvShowViewModelTest {
         TestCase.assertEquals(dummyTvShow.numberOfEpisodes, tvShowEntities.numberOfEpisodes)
         TestCase.assertEquals(dummyTvShow.numberOfSeasons, tvShowEntities.numberOfSeasons)
 
-        val genresEntities = viewModel.getTvShow(tvShowId).value?.data!!.mGenresTvShow
+        val genresEntities = viewModel.tvShowModule.value?.data!!.mGenresTvShow
         TestCase.assertNotNull(genresEntities)
         TestCase.assertEquals(4, genresEntities.size.toLong())
 
-        viewModel.getTvShow(tvShowId).observeForever(observer)
+        viewModel.tvShowModule.observeForever(observer)
         Mockito.verify(observer).onChanged(Resource.success(dummyTvShowDetail))
     }
 }

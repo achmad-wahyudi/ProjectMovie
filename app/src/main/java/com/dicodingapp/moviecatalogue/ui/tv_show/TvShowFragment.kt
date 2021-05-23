@@ -1,5 +1,6 @@
 package com.dicodingapp.moviecatalogue.ui.tv_show
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicodingapp.moviecatalogue.data.source.remote.network.ApiConfig
 import com.dicodingapp.moviecatalogue.databinding.FragmentTvShowBinding
+import com.dicodingapp.moviecatalogue.ui.bookmark.BookmarkActivity
 import com.dicodingapp.moviecatalogue.viewmodel.ViewModelFactory
 import com.dicodingapp.moviecatalogue.vo.Status
 
@@ -61,6 +63,12 @@ class TvShowFragment : Fragment() {
                 this?.layoutManager = GridLayoutManager(context, 2)
                 this?.setHasFixedSize(true)
                 this?.adapter = tvShowAdapter
+            }
+
+            binding?.btn?.setOnClickListener {
+                val intent = Intent(context, BookmarkActivity::class.java)
+                intent.putExtra(BookmarkActivity.EXTRA_BOOKMARK, "2")
+                startActivity(intent)
             }
         }
     }

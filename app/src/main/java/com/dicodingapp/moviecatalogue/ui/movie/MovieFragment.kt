@@ -1,5 +1,6 @@
 package com.dicodingapp.moviecatalogue.ui.movie
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicodingapp.moviecatalogue.data.source.remote.network.ApiConfig
 import com.dicodingapp.moviecatalogue.databinding.FragmentMovieBinding
+import com.dicodingapp.moviecatalogue.ui.bookmark.BookmarkActivity
 import com.dicodingapp.moviecatalogue.viewmodel.ViewModelFactory
 import com.dicodingapp.moviecatalogue.vo.Status
 
@@ -31,7 +33,8 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val factory = ViewModelFactory.getInstance(requireActivity(), ApiConfig.provideApiService())
+            val factory =
+                ViewModelFactory.getInstance(requireActivity(), ApiConfig.provideApiService())
             val viewModel = ViewModelProvider(
                 this,
                 factory
@@ -59,6 +62,12 @@ class MovieFragment : Fragment() {
                 this?.layoutManager = GridLayoutManager(context, 2)
                 this?.setHasFixedSize(true)
                 this?.adapter = movieAdapter
+            }
+
+            binding?.btn?.setOnClickListener {
+                val intent = Intent(context, BookmarkActivity::class.java)
+                intent.putExtra(BookmarkActivity.EXTRA_BOOKMARK, "1")
+                startActivity(intent)
             }
         }
     }

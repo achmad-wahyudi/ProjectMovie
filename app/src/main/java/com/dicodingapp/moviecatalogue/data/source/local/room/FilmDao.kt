@@ -41,4 +41,16 @@ interface FilmDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertLastEpisodeToAir(lastEpisodeToAir: TvShowLastEpisodeEntity)
+
+    @Query("SELECT * FROM moviesentities where bookmarked = 1")
+    fun getBookmarkedMovie(): LiveData<List<MovieEntity>>
+
+    @Update
+    fun updateMovie(movie: MovieEntity)
+
+    @Query("SELECT * FROM tvshowsentities where bookmarked = 1")
+    fun getBookmarkedTvShow(): LiveData<List<TvShowEntity>>
+
+    @Update
+    fun updateTvShow(movie: TvShowEntity)
 }

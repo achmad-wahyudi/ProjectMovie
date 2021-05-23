@@ -202,4 +202,16 @@ class FilmRepository private constructor(
             }
         }.asLiveData()
     }
+
+    override fun getAllBookmarkedMovie(): LiveData<List<MovieEntity>> =
+        localDataSource.getAllBookmarkedMovie()
+
+    override fun setMovieBookmark(movie: MovieEntity, state: Boolean) =
+        appExecutors.diskIO().execute { localDataSource.setMovieBookmark(movie, state) }
+
+    override fun getAllBookmarkedTvShow(): LiveData<List<TvShowEntity>> =
+        localDataSource.getAllBookmarkedTvShow()
+
+    override fun setTvShowBookmark(tvShow: TvShowEntity, state: Boolean) =
+        appExecutors.diskIO().execute { localDataSource.setTvShowBookmark(tvShow, state) }
 }

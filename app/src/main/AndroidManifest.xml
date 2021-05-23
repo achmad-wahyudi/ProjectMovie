@@ -26,6 +26,7 @@
         <activity
             android:name=".ui.detail.DetailFilmActivity"
             android:theme="@style/Theme.MovieCatalogueFullscreen" />
+        <activity android:name=".ui.bookmark.BookmarkActivity" />
     </application>
 
 </manifest>

@@ -37,6 +37,7 @@ class DetailMovieViewModelTest {
     @Before
     fun setUp() {
         viewModel = DetailFilmViewModel(filmRepository)
+        viewModel.setSelectedMovie(movieId)
     }
 
     @Test
@@ -46,7 +47,9 @@ class DetailMovieViewModelTest {
         movie.value = Resource.success(dummyMovieDetail)
 
         Mockito.`when`(filmRepository.getMovieById(Integer.parseInt(movieId))).thenReturn(movie)
-        val movieEntities = viewModel.getMovie(movieId).value?.data!!.mMovie
+        viewModel.movieModule.observeForever(observer)
+
+        val movieEntities = viewModel.movieModule.value?.data!!.mMovie
         Mockito.verify(filmRepository).getMovieById(Integer.parseInt(movieId))
         assertNotNull(movieEntities)
         assertEquals(dummyMovie.movieId, movieEntities.movieId)
@@ -61,11 +64,11 @@ class DetailMovieViewModelTest {
         assertEquals(dummyMovie.budget, movieEntities.budget)
         assertEquals(dummyMovie.revenue, movieEntities.revenue)
 
-        val genresEntities = viewModel.getMovie(movieId).value?.data!!.mGenres
+        val genresEntities = viewModel.movieModule.value?.data!!.mGenres
         assertNotNull(genresEntities)
         assertEquals(4, genresEntities.size.toLong())
 
-        viewModel.getMovie(movieId).observeForever(observer)
+        viewModel.movieModule.observeForever(observer)
         Mockito.verify(observer).onChanged(Resource.success(dummyMovieDetail))
     }
 }

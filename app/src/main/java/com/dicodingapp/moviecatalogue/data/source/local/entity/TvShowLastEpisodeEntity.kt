@@ -23,31 +23,24 @@ data class TvShowLastEpisodeEntity(
     @ColumnInfo(name = "tvShowId")
     var tvShowId: String,
 
-    @NonNull
     @ColumnInfo(name = "air_date")
     var air_date: String,
 
-    @NonNull
     @ColumnInfo(name = "episodeNumber")
     var episodeNumber: String,
 
-    @NonNull
     @ColumnInfo(name = "lastId")
     var id: String,
 
-    @NonNull
     @ColumnInfo(name = "name")
     var name: String,
 
-    @NonNull
     @ColumnInfo(name = "overview")
     var overview: String,
 
-    @NonNull
     @ColumnInfo(name = "seasonNumber")
     var seasonNumber: String,
 
-    @NonNull
     @ColumnInfo(name = "stillPath")
     var stillPath: String,
 )

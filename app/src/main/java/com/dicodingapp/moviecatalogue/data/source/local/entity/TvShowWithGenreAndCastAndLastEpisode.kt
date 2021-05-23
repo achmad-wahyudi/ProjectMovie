@@ -15,5 +15,5 @@ data class TvShowWithGenreAndCastAndLastEpisode(
     var mCastTvShow: List<CastTvShowEntity>,
 
     @Relation(parentColumn = "tvShowId", entityColumn = "tvShowId")
-    var mLastEpisode: TvShowLastEpisodeEntity
+    var mLastEpisode: TvShowLastEpisodeEntity?
 )
