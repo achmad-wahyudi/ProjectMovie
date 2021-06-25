@@ -103,4 +103,33 @@ class FilmRepositoryTest {
         assertNotNull(tvShowEntitiesContent.name)
     }
 
+    @Test
+    fun getAllBookmarkedMovie() {
+        val dataSourceFactory =
+            mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
+        `when`(local.getAllBookmarkedMovie()).thenReturn(dataSourceFactory)
+        filmRepository.getAllBookmarkedMovie()
+
+        val movieEntities =
+            Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyMovie()))
+
+        verify(local).getAllBookmarkedMovie()
+        assertNotNull(movieEntities.data)
+        assertEquals(movieResponses.size.toLong(), movieEntities.data?.size?.toLong())
+    }
+
+    @Test
+    fun getAllBookmarkedTvShow() {
+        val dataSourceFactory =
+            mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TvShowEntity>
+        `when`(local.getAllBookmarkedTvShow()).thenReturn(dataSourceFactory)
+        filmRepository.getAllBookmarkedTvShow()
+
+        val tvShowEntities =
+            Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyTvShow()))
+
+        verify(local).getAllBookmarkedTvShow()
+        assertNotNull(tvShowEntities.data)
+        assertEquals(tvShowResponses.size.toLong(), tvShowEntities.data?.size?.toLong())
+    }
 }
